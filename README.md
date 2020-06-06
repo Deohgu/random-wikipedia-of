@@ -1,2 +1,2 @@
-# Random-Wikipedia-of
-Providing a random Wikipedia article of a set category and N subcategories.
+# Random Wikipedia of
+Providing a random Wikipedia article of choosen category with and N-depth of its subcategories.

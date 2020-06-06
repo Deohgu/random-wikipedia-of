@@ -1,2 +1,2 @@
 # Random Wikipedia of
-Providing a random Wikipedia article of choosen category with and N-depth of its subcategories.
+Providing a random Wikipedia article within the choosen category and of its subcategories to N depth.

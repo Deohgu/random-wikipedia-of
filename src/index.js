@@ -1,24 +1,6 @@
-// const InputComponent = () => {
-//   <input type="text" tabindex="1">
-      
-//   </input>
-// };
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-// // Rendering the input field
-// class InputField extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       category: ""
-//     };
-//   }
-  
-//   render() {
-//     <form>
-//       <inputComponent />
-      
-//     </form>
-//   }
-// }
+import App from './App';
 
-console.log('Hello World!');
+ReactDOM.render(<App />, document.getElementById('root'));

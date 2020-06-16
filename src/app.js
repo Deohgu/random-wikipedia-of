@@ -3,6 +3,9 @@ import React from 'react';
 import { InputField, Title } from './components';
 import styles from './App.module.css';
 
+// Sort this
+// import { request } from './api';
+
 class App extends React.Component {
   render() {
     return (
@@ -14,11 +17,18 @@ class App extends React.Component {
   }
 }
 
+
+
 // App done whilst following a youtube video regarding a different app done with React
 // Left off at 15:40
 // https://www.youtube.com/watch?v=khJlrj3Y6Ls
 
 export default App;
+
+
+
+
+
 
 // const InputComponent = () => {
 //   <input type="text" tabindex="1">

@@ -9,17 +9,16 @@
 
 let mainCategory = "Botany"; // test run, delete Botany
 
-
-fetch(`https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&cmnamespace=14&format=json&cmlimit=500`)
+/*
+ export const fetchData  = fetch(`https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&cmnamespace=14&format=json&cmlimit=500`)
   .then(response => response.json())
   .then(data => console.log(data));
-
-
-/*
-const request = async () => {
-  const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&cmnamespace=14&format=json&cmlimit=500`);
-  const json = await response.json();
-  console.log(json);
-}
-request();
 */
+
+
+
+export const request = async () => {
+  const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&cmnamespace=14&format=json&cmlimit=500`);
+  const data = await response.json();
+  console.log(data);
+}

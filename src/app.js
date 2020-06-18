@@ -9,9 +9,13 @@ import { request } from './api';
 
 class App extends React.Component {
 
-  // This is to be re done once the fetch call is destructured.
+  // This is to be re done once the fetch call is destructured. // continue at 24:30 https://www.youtube.com/watch?v=khJlrj3Y6Ls 
+
+  // state = { }  no constructor needed, done in backend?
   async componentDidMount() {
     const data = await request();
+
+    console.log(data);
   }
 
   render() {
@@ -23,16 +27,6 @@ class App extends React.Component {
     );
   }
 }
-
-// Currently here!
-// Seems to be loggin before the data is delivered, do I also need to make it async?
-// Check youtube projects like before.
-const logData = async () => {
-  console.log( await request());
-}
-logData();
-
-// Currently working between app.js and ./api/index.js
 
 // App done whilst following a youtube video regarding a different app done with React
 // Left off at 15:40

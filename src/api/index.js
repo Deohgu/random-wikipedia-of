@@ -7,18 +7,17 @@
 
 // Currently need to export the data to the app.js file
 
-let mainCategory = "Botany"; // test run, delete Botany
+let mainCategory = "Botany"; // test run, delete Botany after
 
-/*
- export const fetchData  = fetch(`https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&cmnamespace=14&format=json&cmlimit=500`)
-  .then(response => response.json())
-  .then(data => console.log(data));
-*/
+const url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
 
 
-
+// Will need to destructure this after reading about destructuring. Just making it neater for future usage and quality of code
+// As done around the minute 23. https://www.youtube.com/watch?v=khJlrj3Y6Ls
 export const request = async () => {
-  const response = await fetch(`https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&cmnamespace=14&format=json&cmlimit=500`);
+  const response = await fetch(url);
   const data = await response.json();
-  console.log(data);
+  return data;
 }
+
+console.log(` type of request = ${typeof request}`);

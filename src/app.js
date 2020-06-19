@@ -3,33 +3,37 @@ import React from 'react';
 import { InputField, Title } from './components';
 import styles from './App.module.css';
 
-// Sort this
 import { request } from './api';
 
 
 class App extends React.Component {
 
-  // This is to be re done once the fetch call is destructured. // continue at 24:30 https://www.youtube.com/watch?v=khJlrj3Y6Ls 
+  // Babel will transpile and add a constructor behind the scenes.
+  state = {
+    data: [],
+    selectedData: "",
+  }
 
-  // state = { }  no constructor needed, done in backend?
   async componentDidMount() {
-    const data = await request();
+    const fetchedData = await request();
 
-    console.log(data);
+    this.setState({ data: fetchedData });
   }
 
   render() {
+  console.log(this.state.data);
+
     return (
       <div className={styles.container}>
         <Title />
-        <InputField />
+        <InputField data={this.state.data} />
       </div>
     );
   }
 }
 
 // App done whilst following a youtube video regarding a different app done with React
-// Left off at 15:40
+// Left off at ####
 // https://www.youtube.com/watch?v=khJlrj3Y6Ls
 // Compare with this one to understand
 // https://www.youtube.com/watch?v=U9T6YkEDkMo

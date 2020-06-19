@@ -1,8 +1,14 @@
 import React from 'react';
+import styles from './InputField.module.css';
 
 const InputField = () => {
   return (
-    <h1>InputField</h1>
+    <div className={styles.container}>
+      <input
+        type="text"
+        placeholder="..."
+      />
+    </div>
   )
 }
 

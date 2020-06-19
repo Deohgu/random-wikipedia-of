@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin: 0rem .5rem .5rem .5rem;
+  width: 30rem;
+}
+
+input {
+  background-color: rgb(255, 219, 172);
+  border: none;
+  border-bottom: .1rem solid black;
+
+  width: 70%;
+  padding: 0rem;
+  margin: 0rem;
+}

@@ -1,8 +1,13 @@
 import React from 'react';
+import styles from './Title.module.css';
 
 const Title = () => {
   return (
-    <h1>Title</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>
+        Random Wikipedia of
+      </h1>
+    </div>
   )
 }
 

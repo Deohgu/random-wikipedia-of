@@ -5,7 +5,8 @@ import styles from './App.module.css';
 
 import { request } from './api';
 
-
+// Up next, write code that outputs a random title.
+// questions, where to run the code? a component here? on inputField? a new component? ask André what he thinks. 
 class App extends React.Component {
 
   // Babel will transpile and add a constructor behind the scenes.

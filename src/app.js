@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { InputField, Title } from './components';
+import { TitleInput } from './components';
 import styles from './App.module.css';
 
 import { request } from './api';
@@ -26,8 +26,7 @@ class App extends React.Component {
 
     return (
       <div className={styles.container}>
-        <Title />
-        <InputField data={this.state.data} />
+        <TitleInput data={this.state.data} />
       </div>
     );
   }

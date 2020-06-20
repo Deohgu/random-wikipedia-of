@@ -1,8 +1,15 @@
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin: 0rem .5rem .5rem .5rem;
   width: 30rem;
+  /* height: 300rem; */
+}
+
+.title {
+  text-align: center;
+  margin: 0rem;
 }
 
 input {

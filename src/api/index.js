@@ -44,17 +44,19 @@ const randomArticle = async (fetchFunction) => {
         const quickFixUrl = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
         
         const catResponse = await fetch(quickFixUrl);
+        
         const { query: { categorymembers }} = await catResponse.json();
-        // Output here is working well.
         return categorymembers;
       }
 
       // CURRENTLY HERE!
-      // This should be outputting an updated filteredCats everytime it runs as it is supposed to be concatenating the array with the returned result of catRequest.
-      // Just changed it to a push on a new variable and it's throwing a promise, maybe it's just asking for the data too quickly.
-      // Fix this.
-      filteredPagesFromCatsTest.push(catRequest());
+      //The Problem was plain and simple that it was pushing to early thus pushing the still unfullfiled promise. With this async function it waits for the result before pushing so it pushes a value as it should.
+      // Just needs cleaning and outputting the precise result, I believe it's spreading the results onto the main aray, and then chosing one at random.
+      const pushToFiltered = async () => {
+      filteredPagesFromCatsTest.push( await catRequest());
       console.log(filteredPagesFromCatsTest)
+      }
+      pushToFiltered();
     });
   });
 

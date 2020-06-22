@@ -46,17 +46,17 @@ const randomArticle = async (fetchFunction) => {
         const catResponse = await fetch(quickFixUrl);
         
         const { query: { categorymembers }} = await catResponse.json();
-        return categorymembers;
-      }
+        // return categorymembers;
+        // CURRENTLY HERE!
+        //The Problem was plain and simple that it was pushing to early thus pushing the still unfulfilled promise. With this async function it waits for the result before pushing so it pushes a value as it should.
+        // Just needs cleaning and outputting the precise result, I believe it's spreading the results onto the main array, and then choosing one at random.
 
-      // CURRENTLY HERE!
-      //The Problem was plain and simple that it was pushing to early thus pushing the still unfullfiled promise. With this async function it waits for the result before pushing so it pushes a value as it should.
-      // Just needs cleaning and outputting the precise result, I believe it's spreading the results onto the main aray, and then chosing one at random.
-      const pushToFiltered = async () => {
-      filteredPagesFromCatsTest.push( await catRequest());
-      console.log(filteredPagesFromCatsTest)
+        // Adding to another day - Figure out this mess of several functions just to use await and then just having to call them like bellow, why IIFE is not working in this example, and does it make sense to use?
+
+        // Moved this things inside to save on creating another async function just to push to the array. 
+        filteredPagesFromCatsTest.push( await categorymembers);
       }
-      pushToFiltered();
+      catRequest();
     });
   });
 
@@ -66,6 +66,8 @@ const randomArticle = async (fetchFunction) => {
 
   console.log(filteredPages);
   console.log(filteredCats);
+
+  console.log(filteredPagesFromCatsTest);
 }
 
 randomArticle(request());

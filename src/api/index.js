@@ -49,6 +49,7 @@ const randomArticle = async (fetchFunction) => {
         //https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
         // Instead I have to use a modern for of
         
+        // THIS NEEDS TO FILTER THE SUBCATS OUT, FIX THIS!
         for await (const element of categorymembers) {
             filteredPagesFromCatsTest.push(element.title
               .replace(/Category:/g, "")

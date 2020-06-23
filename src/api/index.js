@@ -23,9 +23,8 @@ const randomArticle = async (fetchFunction) => {
   let filteredCats = [];
 
   let filteredPagesFromCatsTest = [];
-
-  // Dividing and formatting the data to a slug
-  fetchedData.forEach(element => {
+  
+  for await (const element of fetchedData) {
     if (element.type === "page") {
       filteredPages.push(element.title
         .replace(/[" "]/g, "_"));
@@ -34,12 +33,10 @@ const randomArticle = async (fetchFunction) => {
         .replace(/Category:/g, "")
         .replace(/[" "]/g, "_"));
     }
-
-    // Add this to the else in fetchedData.forEach
-    filteredCats.forEach(element => {
+    
+    for await (const element of filteredCats) {
+      
       mainCategory = element;
-      // IIFE - Instantly evokes itself.
-      (async () => {
 
         // fetch url underneath keeps looking for mainCategory of Botany for some reason, so I am redoing a var here with the same url to temporarily fix it
         const quickFixUrl = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
@@ -47,35 +44,29 @@ const randomArticle = async (fetchFunction) => {
         const catResponse = await fetch(quickFixUrl);
         
         const { query: { categorymembers }} = await catResponse.json();
-        // return categorymembers;
-        // CURRENTLY HERE!
-        //The Problem was plain and simple that it was pushing to early thus pushing the still unfulfilled promise. With this async function it waits for the result before pushing so it pushes a value as it should.
-        // Just needs cleaning and outputting the precise result, I believe it's spreading the results onto the main array, and then choosing one at random.
 
-        // Adding to another day - Figure out this mess of several functions just to use await and then just having to call them like bellow, why IIFE is not working in this example, and does it make sense to use?
-
-        // Moved this things inside to save on creating another async function just to push to the array.
-        // (async () => {
-        //   await categorymembers.forEach(firstArray => {
-        //     firstArray.forEarch(secondArrayElement => {
-        //       filteredPagesFromCatsTest.push(secondArrayElement);
-        //     })
-        //   });
-        // })();
-        
         // Just learned that forEach does not work Async, read here:
         //https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
         // Instead I have to use a modern for of
         
-        for await (const firstArray of categorymembers) {
-          // for await (const secondArray of firstArray) {
-            filteredPagesFromCatsTest.push(firstArray.title
-              .replace(/Category:/g, ""));
-          // }
+        for await (const element of categorymembers) {
+            filteredPagesFromCatsTest.push(element.title
+              .replace(/Category:/g, "")
+              .replace(/[" "]/g, "_"));
         }
-      })();
-    });
-  });
+    }
+  };
+  
+  // Everything is working but it is suuuuuper slow to fetch everything!
+  
+  // Last touches with pushing things where they need to be and picking one at random.
+  
+  // Then major code cleaning - remember, use of IIFE and seeing what can removed for a correct order of calls through await structure. Await makes the whole async function wait for that result to be finished, but only inside that async function. It's a simple organisation of sequences throught await.
+  //Another thing is to check if I still need the quickFixUrl
+  
+  // Then improving speed
+  
+  // After all that continue with project, remember the option to return another one from the array if the search is the same.
 
 
 

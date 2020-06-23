@@ -38,7 +38,8 @@ const randomArticle = async (fetchFunction) => {
     // Add this to the else in fetchedData.forEach
     filteredCats.forEach(element => {
       mainCategory = element;
-      const catRequest = async () => {
+      // IIFE - Instantly evokes itself.
+      (async () => {
 
         // fetch url underneath keeps looking for mainCategory of Botany for some reason, so I am redoing a var here with the same url to temporarily fix it
         const quickFixUrl = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
@@ -53,16 +54,32 @@ const randomArticle = async (fetchFunction) => {
 
         // Adding to another day - Figure out this mess of several functions just to use await and then just having to call them like bellow, why IIFE is not working in this example, and does it make sense to use?
 
-        // Moved this things inside to save on creating another async function just to push to the array. 
-        filteredPagesFromCatsTest.push( await categorymembers);
-      }
-      catRequest();
+        // Moved this things inside to save on creating another async function just to push to the array.
+        // (async () => {
+        //   await categorymembers.forEach(firstArray => {
+        //     firstArray.forEarch(secondArrayElement => {
+        //       filteredPagesFromCatsTest.push(secondArrayElement);
+        //     })
+        //   });
+        // })();
+        
+        // Just learned that forEach does not work Async, read here:
+        //https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
+        // Instead I have to use a modern for of
+        
+        for await (const firstArray of categorymembers) {
+          // for await (const secondArray of firstArray) {
+            filteredPagesFromCatsTest.push(firstArray.title
+              .replace(/Category:/g, ""));
+          // }
+        }
+      })();
     });
   });
 
 
 
-  
+
 
   console.log(filteredPages);
   console.log(filteredCats);

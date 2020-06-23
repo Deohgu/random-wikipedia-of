@@ -59,6 +59,8 @@ const randomArticle = async (fetchFunction) => {
   };
   
   // Everything is working but it is suuuuuper slow to fetch everything!
+  // One solution is to instead of fetching all the 25 subcats, it fetches one subcat at random each time the user wants another result. Instead of waiting 1 minute for everything and going with the third pick or whatever, they might request 3 times and wait a second each time for a total of 3 seconds?
+  // And each time it would add to the array, so each new request for a page inside the same query name it just fetches for a new sub cat and gives another at random?
   
   // Last touches with pushing things where they need to be and picking one at random.
   

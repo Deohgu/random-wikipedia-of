@@ -3,12 +3,14 @@ import React from 'react';
 import { TitleInput } from './components';
 import styles from './App.module.css';
 
-import { request } from './api';
+import { randomArticle } from './api';
 
 // Up next, write code that outputs a random title.
-// questions, where to run the code? a component here? on inputField? a new component? ask André what he thinks. 
+// questions, where to run the code? a component here? on inputField? a new component? ask André what he thinks.
 class App extends React.Component {
 
+  // On hold as this is no longer to use the previous function
+  
   // Babel will transpile and add a constructor behind the scenes.
   state = {
     data: [],
@@ -16,13 +18,13 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    const fetchedData = await request();
+    const fetchedData = await randomArticle();
 
     this.setState({ data: fetchedData });
   }
 
   render() {
-  console.log(this.state.data);
+  // console.log(this.state.data);
 
     return (
       <div className={styles.container}>

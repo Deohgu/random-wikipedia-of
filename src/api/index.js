@@ -3,28 +3,30 @@
 // If category has more than 500 results how to solve it? there's a continue prop, look into that
 
 
-let mainCategory = "Botany"; // test run only, replace with input after
+console.log("index.js is working and showing");
+
+
+let mainCategory = "botany"; // test run only, replace with input after
 
 const url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
 
 // Note to self: Destructured so that the we return nothing but what we are interested in.
-export const request = async () => {
-  const response = await fetch(url);
-  const { query: { categorymembers } } = await response.json();
-  return categorymembers;
-}
-
 
 // Output one article at random
-const randomArticle = async (fetchFunction) => {
-  const fetchedData = await fetchFunction;
+export const randomArticle = async () => {
+  // Counting the time required for all the Fetch requests;
+  console.time("Fetch this time");
+  
 
   let filteredPages = [];
   let filteredCats = [];
 
   let filteredPagesFromCatsTest = [];
   
-  for await (const element of fetchedData) {
+  const response = await fetch(url);
+  const { query: { categorymembers } } = await response.json();
+  
+  for await (const element of categorymembers) {
     if (element.type === "page") {
       filteredPages.push(element.title
         .replace(/[" "]/g, "_"));
@@ -39,9 +41,9 @@ const randomArticle = async (fetchFunction) => {
       mainCategory = element;
 
         // fetch url underneath keeps looking for mainCategory of Botany for some reason, so I am redoing a var here with the same url to temporarily fix it
-        const quickFixUrl = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
+        // const quickFixUrl = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
         
-        const catResponse = await fetch(quickFixUrl);
+        const catResponse = await fetch(url);
         
         const { query: { categorymembers }} = await catResponse.json();
 
@@ -51,9 +53,11 @@ const randomArticle = async (fetchFunction) => {
         
         // THIS NEEDS TO FILTER THE SUBCATS OUT, FIX THIS!
         for await (const element of categorymembers) {
+          if(element.type === "page") {
             filteredPagesFromCatsTest.push(element.title
               .replace(/Category:/g, "")
               .replace(/[" "]/g, "_"));
+          }
         }
     }
   };
@@ -74,11 +78,12 @@ const randomArticle = async (fetchFunction) => {
 
 
 
-
+  console.timeEnd("Fetch time");
   console.log(filteredPages);
   console.log(filteredCats);
 
   console.log(filteredPagesFromCatsTest);
+  // return filteredPagesFromCatsTest;
 }
 
-randomArticle(request());
+// randomArticle();

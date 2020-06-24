@@ -4,58 +4,88 @@
 console.log("./api/index.js is working");
 
 
-// Output one article at random
-export const randomArticle = async () => {
-  // Counting the time required for all the Fetch requests;
-  console.time("Fetch this time");
-  
-  let mainCategory = "botany"; // test run only, replace with input after
 
-  const url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
+let category = "botany"; // test run only, replace with input after
 
-  let filteredPages = [];
-  let filteredCats = [];
+let url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${category}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
 
-  let filteredPagesFromCatsTest = [];
-  
-  const response = await fetch(url);
-  const { query: { categorymembers } } = await response.json();
+let pages = [];
+let subCats = [];
+
+// let filteredPagesFromCatsTest = [];
+
+const fetchPush = async () => {
+  const urlFetch = await fetch(url);
+  const { query: { categorymembers } } = await urlFetch.json();
   
   for await (const element of categorymembers) {
     if (element.type === "page") {
-      filteredPages.push(element.title
+      pages.push(element.title
         .replace(/[" "]/g, "_"));
     } else {
-      filteredCats.push(element.title
+      subCats.push(element.title
         .replace(/Category:/g, "")
         .replace(/[" "]/g, "_"));
     }
-    
-    for await (const element of filteredCats) {
-      
-      mainCategory = element;
-
-        // fetch url underneath keeps looking for mainCategory of Botany for some reason, so I am redoing a var here with the same url to temporarily fix it
-        // const quickFixUrl = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
-        
-        const catResponse = await fetch(url);
-        
-        const { query: { categorymembers }} = await catResponse.json();
-
-        // Just learned that forEach does not work Async, read here:
-        //https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
-        // Instead I have to use a modern for of
-        
-        // THIS NEEDS TO FILTER THE SUBCATS OUT, FIX THIS!
-        for await (const element of categorymembers) {
-          if(element.type === "page") {
-            filteredPagesFromCatsTest.push(element.title
-              .replace(/Category:/g, "")
-              .replace(/[" "]/g, "_"));
-          }
-        }
-    }
   };
+}
+
+// Should be called when a new category is entered
+// After the enter/submit control the previous states should be compared in order to choose which function to run.
+export const newCat = async () => {
+
+  await fetchPush();
+
+  await newSubCat();
+  
+  console.log(pages);
+  console.log(subCats);
+};
+
+
+export const newSubCat = async () => {
+  // Pick one at random from subCats, remove it from that array, fetch that subCat, add the results to pages
+  const randomIndex = Math.floor(Math.random() * subCats.length);
+  const randomSubCat = subCats[randomIndex];
+  
+  // Removing the subCat so that it won't be re-picked.
+  subCats.splice(randomIndex, 1);
+  
+  // just changing the global category doesn't seem to work so I am changing the url here. 
+  url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${randomSubCat}&cmprop=title|type&format=json&cmlimit=500&cmtype=page`;
+
+  await fetchPush();
+  
+  
+  // Output one at random from pages and remove it
+  
+
+  // I am a bit confused regarding the length of the results, it should be working, just need to check if it's adding more than it should. The first adds the standard + a random subCat and then the last pages console.log should be the first plus this new subCat
+  console.log(randomSubCat + randomSubCat.length);
+  console.log(pages);
+};
+
+
+
+
+
+
+
+
+
+// Output one article at random
+  // Counting the time required for all the Fetch requests;
+  
+
+  
+  
+
+
+    // Solution:
+    
+    // Run the first fetch, distribute data and run subCatFetchFunction on a random subcat from the subcats array and remove that subcat from that array. In essence this code will breakdown into at least two separate functions that will be called in app.js?
+    // random button - if category exists (was inputed) and is equal to previous category state (variable as updated method exists?) run the newSubCat and subsequently.
+
   
   // Everything is working but it is suuuuuper slow to fetch everything!
   // One solution is to instead of fetching all the 25 subcats, it fetches one subcat at random each time the user wants another result. Instead of waiting 1 minute for everything and going with the third pick or whatever, they might request 3 times and wait a second each time for a total of 3 seconds?
@@ -72,13 +102,8 @@ export const randomArticle = async () => {
 
 
 
-
-  console.timeEnd("Fetch time");
-  console.log(filteredPages);
-  console.log(filteredCats);
-
-  console.log(filteredPagesFromCatsTest);
+  // console.log(filteredPagesFromCats);
   // return filteredPagesFromCatsTest;
-}
+
 
 // randomArticle();

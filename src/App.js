@@ -3,7 +3,7 @@ import React from 'react';
 import { TitleInput } from './components';
 import styles from './App.module.css';
 
-import { randomArticle } from './api';
+import { newCat, newSubCat } from './api';
 
 // Up next, write code that outputs a random title.
 // questions, where to run the code? a component here? on inputField? a new component? ask André what he thinks.
@@ -18,9 +18,12 @@ class App extends React.Component {
   }
 
   async componentDidMount() {
-    const fetchedData = await randomArticle();
+    // const fetchedData = await newCat();
+    await newCat();
 
-    this.setState({ data: fetchedData });
+    await newSubCat();
+
+    // this.setState({ data: fetchedData });
   }
 
   render() {

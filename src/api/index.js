@@ -1,22 +1,17 @@
 // have it at 1 for level deep as standard.
+// Is it possible to have several levels deep without pulling several of them?Currently first fetch pulls pages and subcats. subsubcats would require 2 fetches for??
 
-// If category has more than 500 results how to solve it? there's a continue prop, look into that
+console.log("./api/index.js is working");
 
-
-console.log("index.js is working and showing");
-
-
-let mainCategory = "botany"; // test run only, replace with input after
-
-const url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
-
-// Note to self: Destructured so that the we return nothing but what we are interested in.
 
 // Output one article at random
 export const randomArticle = async () => {
   // Counting the time required for all the Fetch requests;
   console.time("Fetch this time");
   
+  let mainCategory = "botany"; // test run only, replace with input after
+
+  const url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${mainCategory}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
 
   let filteredPages = [];
   let filteredCats = [];

@@ -21,7 +21,7 @@ class App extends React.Component {
     // const fetchedData = await newCat();
     await newCat();
 
-    await newSubCat();
+    newSubCat();
 
     // this.setState({ data: fetchedData });
   }

@@ -13,25 +13,30 @@ class App extends React.Component {
   
   // Babel will transpile and add a constructor behind the scenes.
   state = {
-    data: [],
+    inputData: "testtest",
     selectedData: "",
   }
 
   async componentDidMount() {
-    // const fetchedData = await newCat();
+    
     await newCat();
-
     newSubCat();
-
-    // this.setState({ data: fetchedData });
   }
 
+  handleChange = (event) => {
+    this.setState({inputData: event.target.value});
+  }
+
+
   render() {
-  // console.log(this.state.data);
+  console.log(`inputData = ${this.state.inputData}`);
 
     return (
       <div className={styles.container}>
-        <TitleInput data={this.state.data} />
+        <TitleInput
+          inputData={this.state.inputData}
+          handleChange={this.handleChange} 
+        />
       </div>
     );
   }

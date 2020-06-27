@@ -9,7 +9,7 @@ import { newCat, newSubCat } from './api';
 
 const App = () => {
 
-  const [ inputData, setInputData ] = useState("testest")
+  const [ inputData, setInputData ] = useState("")
 
   useEffect (() => {
     (async () => {
@@ -18,11 +18,13 @@ const App = () => {
     })();
   });
 
+  console.log( inputData );
+
   return (
     <div className={styles.container}>
       <TitleInput
-        // inputData={this.state.inputData}
-        // handleChange={this.handleChange} 
+        inputData={ inputData }
+        handleChange={ (e) => setInputData(e.target.value) } 
       />
     </div>
   );

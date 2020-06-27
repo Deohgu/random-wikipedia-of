@@ -11,8 +11,10 @@ const TitleInput = () => {
         type="text"
         placeholder="Category"
         // Trying to understand why this is not being read. All in all I need to learn about forms in React anyway, that should sort the issue.
-        // value={this.props.inputData}
-        // onChange={this.props.handleChange} 
+
+        // Seems like it's regarding the "this" thing, I need to read on it.
+        value={this.props.inputData}
+        onChange={this.props.handleChange} 
       />
     </div>
   )

@@ -38,6 +38,7 @@ export const newCat = async () => {
   await fetchPush();
 
   await newSubCat();
+  
 };
 
 

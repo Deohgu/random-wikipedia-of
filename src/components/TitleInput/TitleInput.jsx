@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './TitleInput.module.css';
 
-const TitleInput = () => {
+const TitleInput = (props) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>
@@ -10,12 +10,9 @@ const TitleInput = () => {
       <input
         type="text"
         placeholder="Category"
-        // Trying to understand why this is not being read. All in all I need to learn about forms in React anyway, that should sort the issue.
-
-        // Seems like it's regarding the "this" thing, I need to read on it.
-        value={this.props.inputData}
-        onChange={this.props.handleChange} 
-      />
+        value={props.inputData}
+        onChange={props.handleChange} 
+        />
     </div>
   )
 }

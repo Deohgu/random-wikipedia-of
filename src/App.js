@@ -9,14 +9,14 @@ import { newCat, newSubCat } from './api';
 
 const App = () => {
 
-  const [ inputData, setInputData ] = useState("")
+  const [ inputData, setInputData ] = useState("test")
 
   useEffect (() => {
     (async () => {
       await newCat();
       newSubCat();
     })();
-  });
+  }, []);
 
   console.log( inputData );
 

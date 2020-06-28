@@ -13,6 +13,11 @@ const TitleInput = (props) => {
         value={props.inputData}
         onChange={props.handleChange} 
         />
+      <input
+        type="submit" 
+        value="random"
+        // onClick=""
+      />
     </div>
   )
 }

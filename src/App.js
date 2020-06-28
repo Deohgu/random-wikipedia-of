@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { TitleInput } from './components';
 import styles from './App.module.css';
 
-import { newCat, newSubCat } from './api';
-
+import { newCat, newSubCat, category } from './api';
 
 
 const App = () => {
@@ -13,6 +12,8 @@ const App = () => {
 
   useEffect (() => {
     (async () => {
+      // category = "duck";
+
       await newCat();
       newSubCat();
     })();

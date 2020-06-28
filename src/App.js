@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { TitleInput } from './components';
 import styles from './App.module.css';
 
-import { newCat, newSubCat, category } from './api';
+import { newCat, newSubCat } from './api';
 
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
 
   useEffect (() => {
     (async () => {
-      // category = "duck";
+      // Call a function from the api with the parameter inputData, then on that function the link would use this parameter. The function would call after it is submitted. 
 
       await newCat();
       newSubCat();

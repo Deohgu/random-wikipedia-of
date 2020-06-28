@@ -4,6 +4,8 @@
 // To do here:
 // If the picked subcat has no pages (probably only subcats) fetch a level deeper?  In total it's first Category Fetch, second SubCat fetch, and third random subCat fetch. For a new random it's simply 2 fetches. So not that many unless you're very unlucky.
 
+
+// This could be inside a function and category would receive from that function parameter! which would be passed from the app.js component!
 let category = "botany"; // test run only, replace with input after
 let url = "";
 let pages = [];

@@ -5,15 +5,12 @@
 // If the picked subcat has no pages (probably only subcats) fetch a level deeper?  In total it's first Category Fetch, second SubCat fetch, and third random subCat fetch. For a new random it's simply 2 fetches. So not that many unless you're very unlucky.
 
 
-// This could be inside a function and category would receive from that function parameter! which would be passed from the app.js component!
-let category = "botany"; // test run only, replace with input after
 let url = "";
 let pages = [];
 let subCats = [];
 
 
-
-const fetchPush = async () => {
+const fetchPush = async (category) => {
   const urlFetch = await fetch(url);
   const { query: { categorymembers } } = await urlFetch.json();
   
@@ -31,21 +28,19 @@ const fetchPush = async () => {
   // return categorymembers;
 }
 
-// Should be called when a new category is entered
-// After the enter/submit control the previous states should be compared in order to choose which function to run.
-export const newCat = async () => {
+// Called when a new category is entered
+export const newCat = async (category) => {
 
   url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${category}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
 
-  await fetchPush();
+  await fetchPush(category);
 
   await newSubCat();
   
 };
 
-
+// Called when a category is already entered but user wants another result
 export const newSubCat = async () => {
-  // Pick one at random from subCats, remove it from that array, fetch that subCat, add the results to pages
   const randomSubCatIndex = Math.floor(Math.random() * subCats.length);
   const randomSubCat = subCats[randomSubCatIndex];
   // Removing the subCat so that it won't be re-picked.
@@ -60,7 +55,7 @@ export const newSubCat = async () => {
   // Random article in pages
   const randomPageIndex = Math.floor(Math.random() * pages.length);
   const randomPage = pages[randomPageIndex];
-  // Removing the subCat so that it won't be re-picked
+  // Removing the article page so that it won't be re-picked
   pages.splice(randomPageIndex, 1);
   
   
@@ -70,6 +65,3 @@ export const newSubCat = async () => {
   
   return randomPage;
 };
-  
-
-// random button - if category exists (was inputed) and is equal to previous category state (variable as updated method exists?) run the newSubCat and subsequently.

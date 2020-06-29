@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { TitleInput } from './components';
 import styles from './App.module.css';
@@ -8,24 +8,22 @@ import { newCat, newSubCat } from './api';
 
 const App = () => {
 
-  const [ inputData, setInputData ] = useState("test")
+  // input data has to be converted to a slug before being fetched
+  const [ inputData, setInputData ] = useState("")
 
-  useEffect (() => {
-    (async () => {
-      // Call a function from the api with the parameter inputData, then on that function the link would use this parameter. The function would call after it is submitted. 
+  const fetchCat = async () => {
+    // if statement to choose which function to run based on the inputData and previous inputData
 
-      await newCat();
-      newSubCat();
-    })();
-  }, []);
-
-  console.log( inputData );
+    await newCat(inputData);
+    // newSubCat();
+  }
 
   return (
     <div className={styles.container}>
       <TitleInput
         inputData={ inputData }
         handleChange={ (e) => setInputData(e.target.value) } 
+        inputDataSubmit={ fetchCat }
       />
     </div>
   );

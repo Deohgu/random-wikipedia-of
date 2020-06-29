@@ -10,16 +10,19 @@ const TitleInput = (props) => {
       {/* See what else is required in the form if it is required at all */}
       <form>
         <input
+          action=""
           type="text"
           placeholder="Category"
           value={props.inputData}
           onChange={props.handleChange} 
           />
-        <input
-          type="submit" 
-          value="random"
-          // onClick=""
-        />
+        {/* Have the button work with enter key press */}
+        <button
+          type="button" 
+          onClick={props.inputDataSubmit}
+        >
+          Random
+        </button>
       </form>
     </div>
   )

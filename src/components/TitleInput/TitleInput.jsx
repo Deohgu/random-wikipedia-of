@@ -15,7 +15,7 @@ const TitleInput = (props) => {
           placeholder="Category"
           value={props.inputData}
           onChange={props.handleChange} 
-          />
+        />
         {/* Have the button work with enter key press */}
         <button
           type="button" 

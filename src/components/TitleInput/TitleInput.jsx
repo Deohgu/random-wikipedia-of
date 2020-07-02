@@ -8,7 +8,9 @@ const TitleInput = (props) => {
         Random Wikipedia of
       </h1>
       {/* See what else is required in the form if it is required at all */}
-      <form>
+      <form 
+        onSubmit={ () => false}
+      >
         <input
           action=""
           type="text"
@@ -17,6 +19,7 @@ const TitleInput = (props) => {
           onChange={props.handleChange} 
         />
         {/* Have the button work with enter key press */}
+        {/* The button must be the problem, it must be refreshing the page or something and losing the states! */}
         <button
           type="button" 
           onClick={props.inputDataSubmit}

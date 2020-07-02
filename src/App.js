@@ -13,15 +13,14 @@ const App = () => {
   
   console.log(`inputData = ${inputData}     lockInputData = ${lockInputData}     lockInputData = ${lockInputData.replace(/[" "]/g, "_")}`);
 
-  // PROBLEM - I am trying to use useEffect to call the fetch function once the category (lockInputData) has been set by pressing the button 
-  // Before the useEffect the data exists according to the console.log above it, but the console.log inside of it registers nothing. I believe that it is re rendering as soon as lockInputData is changed thus resets it back to "" and sends that.
-  // Read about useEffect
   useEffect(
     () => {
-      return async () => {
-        console.log( lockInputData.replace(/[" "]/g, "_") );
+      const fetchData = async () => {
         await newCat(lockInputData.replace(/[" "]/g, "_"));
       };
+      if (lockInputData !== "") {
+        fetchData();
+      }
     },
     [lockInputData]
   );

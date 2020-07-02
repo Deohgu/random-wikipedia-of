@@ -10,20 +10,38 @@ const App = () => {
 
   const [ inputData, setInputData ] = useState("")
   const [ lockInputData, setLockInputData ] = useState("")
+  const [prevLockInputData, setPrevLockInputData] = useState("")
   
-  console.log(`inputData = ${inputData}     lockInputData = ${lockInputData}     lockInputData = ${lockInputData.replace(/[" "]/g, "_")}`);
+  console.log(`inputData = ${inputData}, lockInputData = ${lockInputData}, prevLockInputData = ${prevLockInputData}`);
 
-  useEffect(
-    () => {
-      const fetchData = async () => {
-        await newCat(lockInputData.replace(/[" "]/g, "_"));
-      };
-      if (lockInputData !== "") {
-        fetchData();
-      }
-    },
-    [lockInputData]
-  );
+  // Currently requiring two presses to search, I wonder if the setLockInputData is stopping the thing from running by refreshing it somehow.
+  const submitData = async (dataToFetch) => {
+    setLockInputData(dataToFetch); // same as inputData
+
+    if (lockInputData !== "" && lockInputData !== prevLockInputData) {
+      await newCat(dataToFetch.replace(/[" "]/g, "_"))
+      setPrevLockInputData(lockInputData);
+    } else if (lockInputData !== "" && lockInputData === prevLockInputData) {
+      await newSubCat(dataToFetch.replace(/[" "]/g, "_"));
+    }
+  }
+
+  // Was faced with the problem of wanting to use the same state but having it give another result. This only allowed part of the code, meaning when a new category is placed. So I created the above function that works with both and runs straight out of the button press.
+  // useEffect(
+  //   () => {
+  //     const fetchData = async (fetchType) => {
+  //       await fetchType(lockInputData.replace(/[" "]/g, "_"));
+  //     };
+
+  //     if (lockInputData !== "" && lockInputData !== prevLockInputData) {
+  //       fetchData(newCat);
+  //       setPrevLockInputData(lockInputData);
+  //     } else if (lockInputData !== "") {
+  //       fetchData(newSubCat);
+  //     }
+  //   },
+  //   [lockInputData]
+  // );
 
 
   return (
@@ -31,7 +49,7 @@ const App = () => {
       <TitleInput
         inputData={ inputData }
         handleChange={ (e) => setInputData(e.target.value) } 
-        inputDataSubmit={ () => setLockInputData(inputData) }
+        inputDataSubmit={ () => submitData(inputData) }
       />
     </div>
   );

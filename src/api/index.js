@@ -4,6 +4,8 @@
 // To do here:
 // If the picked subcat has no pages (probably only subcats) fetch a level deeper?  In total it's first Category Fetch, second SubCat fetch, and third random subCat fetch. For a new random it's simply 2 fetches. So not that many unless you're very unlucky.
 
+// Found an issue, the pages needs to reset after a new search is provided. This has likely seemed like a bug before when trying botany and then football
+
 
 let url = "";
 let pages = [];

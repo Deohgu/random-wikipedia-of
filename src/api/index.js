@@ -33,6 +33,8 @@ const fetchPush = async (category) => {
 // Called when a new category is entered
 export const newCat = async (category) => {
 
+  console.log(`newCat as been invoked`);
+
   url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${category}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
 
   await fetchPush(category);

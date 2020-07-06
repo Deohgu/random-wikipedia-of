@@ -8,9 +8,6 @@ const TitleInput = (props) => {
         Random Wikipedia of
       </h1>
       {/* See what else is required in the form if it is required at all */}
-      <form 
-        onSubmit={ () => false}
-      >
         <input
           action=""
           type="text"
@@ -26,7 +23,6 @@ const TitleInput = (props) => {
         >
           Random
         </button>
-      </form>
     </div>
   )
 }

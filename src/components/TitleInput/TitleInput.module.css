@@ -1,22 +1,56 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin: 0rem .5rem .5rem .5rem;
-  width: 30rem;
+  margin: 0 5px 5px 5px;
+  width: max-content;
   align-items: center;
 }
 
 .title {
   text-align: center;
-  margin: 0rem;
+  margin: 20px 0 0 0;
+}
+
+form {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  /* Ideal scenario would be for the width to be as large as the content, but that is not working for some reason, max content width just keeps it large. Check what content is there apart from the form and title. */
+  width: 40%;
 }
 
 input {
-  background-color: rgb(255, 219, 172);
-  border: none;
-  border-bottom: .1rem solid black;
+  /* display: flex; */
 
-  width: 70%;
-  padding: 0rem;
-  margin: 0rem;
+
+  /* font-family: inherit; */
+  font-size: inherit;
+  font-weight: inherit;
+  text-align: center;
+
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid black;
+  
+  width: 100%;
+  padding: 0;
+  margin: 4px 0 0 0;
+
+  outline: none;
+} ::placeholder {
+  font-family: roboto;
+  color: inherit;
+}
+
+button {
+  height: 47px;
+  width: 47px;
+  padding: 10px;
+  border: 2px solid black;
+  margin: 20px;
+  border-radius: 100%;
+
+  font-size: 20px;
 }

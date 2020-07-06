@@ -5,7 +5,8 @@ const TitleInput = (props) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>
-        Random Wikipedia of
+        Random<br/>
+        Wikipedia of
       </h1>
       {/* See what else is required in the form if it is required at all */}
       <form 
@@ -14,7 +15,7 @@ const TitleInput = (props) => {
         <input
           action=""
           type="text"
-          placeholder="Category"
+          placeholder="..."
           value={props.inputData}
           onChange={props.handleChange} 
         />
@@ -24,7 +25,7 @@ const TitleInput = (props) => {
           type="button" 
           onClick={props.inputDataSubmit}
         >
-          Random
+          <i className={styles.icon} class="fa fa-search" aria-hidden="true"></i>
         </button>
       </form>
     </div>

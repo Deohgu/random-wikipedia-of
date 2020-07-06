@@ -50,6 +50,8 @@ table {
 
 
 
+
+
 :root {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -66,7 +68,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-top: 100px;
-  /* width: 50%; */
+  width: max-content;
   
   /* visual guide */
   border: 1px solid black;

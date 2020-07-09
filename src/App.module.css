@@ -62,14 +62,11 @@ body {
 
 .container {
   font-size: 40px;
-  font-weight: 700;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 100px;
-  width: max-content;
-  
+	font-weight: 700;
+	
+	margin: 100px auto 0 auto;
+	width: max-content;
+	
   /* visual guide */
-  border: 1px solid black;
+  border: 1px solid black; 
 }

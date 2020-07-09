@@ -1,8 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin: 0 5px 5px 5px;
-  width: max-content;
+  width: 300px;
   align-items: center;
 }
 
@@ -18,7 +17,7 @@ form {
   flex-wrap: wrap;
 
   /* Ideal scenario would be for the width to be as large as the content, but that is not working for some reason, max content width just keeps it large. Check what content is there apart from the form and title. */
-  width: 40%;
+  width: 80%;
 }
 
 input {

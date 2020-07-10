@@ -9,6 +9,7 @@ const App = () => {
 
   const [ inputData, setInputData ] = useState("")
   const [ prevInputData, setPrevInputData ] = useState("")
+  let recomendedArray = [];
    
   // Api request for the recommendations built, can now use (recomendedFunc(inputData)) to receive information
   // Check paper notes, the idea will be to use useEffect on inputData to always provide sugestions.
@@ -16,6 +17,14 @@ const App = () => {
   // In app return there will be a array.map that returns <a className="suggest"> { curr } </a>
   // And that should be placed on the DOM.
   // In CSS it will be edited so that it shows neatly underneath like the codePen example.
+  
+  useEffect(() => {
+   const fetchedData = async () => {
+    const recomendedArray = await recomendedFunc(inputData);
+    // return fetchData;
+   };
+   fetchedData();
+  }, [inputData]);
 
   const submitData = async (dataToFetch) => {
     if (dataToFetch !== "" && dataToFetch !== prevInputData) {
@@ -26,9 +35,9 @@ const App = () => {
     }
   }
 
-  const suggestionBox = {
+  // const suggestionBox = {
     
-  }
+  // }
 
   return (
     <div className={styles.container}>
@@ -37,6 +46,10 @@ const App = () => {
         handleChange={ (e) => setInputData(e.target.value) } 
         inputDataSubmit={ () => submitData(inputData) }
       />
+      { recomendedArray.map(curr => (
+       <a className="recommendations" href="https://en.wikipedia.org/wiki/{curr}">
+        {curr}
+       </a>)) }
     </div>
   );
 }

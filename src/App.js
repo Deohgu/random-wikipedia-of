@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { TitleInput } from './components';
 import styles from './App.module.css';
 
-import { newCat, newSubCat, recomendedFunc } from './api';
+import { newCat, newSubCat, recommendedFunc } from './api';
 
 const App = () => {
 
   const [ inputData, setInputData ] = useState("")
   const [ prevInputData, setPrevInputData ] = useState("")
-  let recomendedArray = [];
+  const [ recommendedArr, setRecommendedArr ] = useState("test")
    
   // Api request for the recommendations built, can now use (recomendedFunc(inputData)) to receive information
   // Check paper notes, the idea will be to use useEffect on inputData to always provide sugestions.
@@ -19,9 +19,9 @@ const App = () => {
   // In CSS it will be edited so that it shows neatly underneath like the codePen example.
   
   useEffect(() => {
-   const fetchedData = async () => {
-    const recomendedArray = await recomendedFunc(inputData);
-    // return fetchData;
+    const fetchedData = async () => {
+    const dataTransf = await recommendedFunc(inputData);
+    setRecommendedArr(dataTransf)
    };
    fetchedData();
   }, [inputData]);
@@ -35,9 +35,8 @@ const App = () => {
     }
   }
 
-  // const suggestionBox = {
-    
-  // }
+  // Find out why this is undefined first.
+  console.log(recommendedArr);
 
   return (
     <div className={styles.container}>
@@ -46,10 +45,10 @@ const App = () => {
         handleChange={ (e) => setInputData(e.target.value) } 
         inputDataSubmit={ () => submitData(inputData) }
       />
-      { recomendedArray.map(curr => (
+      {/* { recommendedArr.map(curr => (
        <a className="recommendations" href="https://en.wikipedia.org/wiki/{curr}">
         {curr}
-       </a>)) }
+       </a>)) } */}
     </div>
   );
 }

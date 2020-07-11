@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { TitleInput } from './components';
 import styles from './App.module.css';
@@ -9,14 +9,11 @@ const App = () => {
 
   const [ inputData, setInputData ] = useState("")
   const [ prevInputData, setPrevInputData ] = useState("")
-  const [ recommendedArr, setRecommendedArr ] = useState("test")
+  const [ recommendedArr, setRecommendedArr ] = useState([])
    
-  // Api request for the recommendations built, can now use (recomendedFunc(inputData)) to receive information
-  // Check paper notes, the idea will be to use useEffect on inputData to always provide sugestions.
-  // useEffect will return an array
-  // In app return there will be a array.map that returns <a className="suggest"> { curr } </a>
-  // And that should be placed on the DOM.
-  // In CSS it will be edited so that it shows neatly underneath like the codePen example.
+  // useEffect is returning an array of recommended searches.
+  // In return we are rendering that array with .map to create several <a>.
+  // In CSS the <a> will be edited so that it shows neatly underneath like the codePen example.
   
   useEffect(() => {
     const fetchedData = async () => {
@@ -24,7 +21,7 @@ const App = () => {
     setRecommendedArr(dataTransf)
    };
    fetchedData();
-  }, [inputData]);
+  }, [inputData.length >= 1]);
 
   const submitData = async (dataToFetch) => {
     if (dataToFetch !== "" && dataToFetch !== prevInputData) {
@@ -35,8 +32,6 @@ const App = () => {
     }
   }
 
-  // Find out why this is undefined first.
-  console.log(recommendedArr);
 
   return (
     <div className={styles.container}>
@@ -45,10 +40,16 @@ const App = () => {
         handleChange={ (e) => setInputData(e.target.value) } 
         inputDataSubmit={ () => submitData(inputData) }
       />
-      {/* { recommendedArr.map(curr => (
-       <a className="recommendations" href="https://en.wikipedia.org/wiki/{curr}">
-        {curr}
-       </a>)) } */}
+
+      {/* Need to provide a unique id for each item next time. Standard react practice. */}
+      { /* ternary to not attempt to render the initial undefined value */
+      (recommendedArr !== undefined)
+        ? ( recommendedArr.map(curr => (
+             <a className="recommendations" href="https://en.wikipedia.org/wiki/{curr}">
+               {curr}
+             </a>)) )
+        : null
+      }
     </div>
   );
 }

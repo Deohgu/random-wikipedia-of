@@ -53,7 +53,9 @@ const App = () => {
                 className={styles.recommendations}
                 target="_blank"
                 href={`https://en.wikipedia.org/wiki/${curr}`}>
-                {curr}
+                {curr
+                  .replace(/Category:/g, "")
+                }
               </a>)) )
           : null
         }

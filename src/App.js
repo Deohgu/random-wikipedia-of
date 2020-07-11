@@ -41,22 +41,29 @@ const App = () => {
         inputDataSubmit={ () => submitData(inputData) }
       />
 
-      {/* Realised that recommendations are based on pages. Instead the recommendations have to replace the written text and then give a random category based on that. */}
+      {/* Understand why the console.log is being exuted without requiring a click */}
+
+      {/* https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a
+      The link in onclick events states that it is better to use the button element to execute javascript due to errors*/}
 
       {/* Need to convert the name to a slug before providing it as a link, aparently seems to work without but might be limted to certain browsers. Not sure what converts it. Probably browser specific */}
       <div className={styles.recContainer}> 
         { /* ternary to not attempt to render the initial undefined value */
         (recommendedArr !== undefined)
           ? ( recommendedArr.map( (curr, index) => (
-              <a
-                key={index}
+              <button
                 className={styles.recommendations}
-                target="_blank"
-                href={`https://en.wikipedia.org/wiki/${curr}`}>
+                type="button"
+                onClick={console.log("test")
+                // onClick={setInputData(curr
+                //   .replace(/Category:/g, "")
+                //   .replace(/[" "]/g, "_"))
+                }>
                 {curr
                   .replace(/Category:/g, "")
                 }
-              </a>)) )
+              </button>
+            )) )
           : null
         }
       </div>

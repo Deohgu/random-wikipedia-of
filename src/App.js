@@ -21,7 +21,7 @@ const App = () => {
     setRecommendedArr(dataTransf)
    };
    fetchedData();
-  }, [inputData.length >= 1]);
+  }, [inputData]);
 
   const submitData = async (dataToFetch) => {
     if (dataToFetch !== "" && dataToFetch !== prevInputData) {
@@ -41,15 +41,21 @@ const App = () => {
         inputDataSubmit={ () => submitData(inputData) }
       />
 
-      {/* Need to provide a unique id for each item next time. Standard react practice. */}
-      { /* ternary to not attempt to render the initial undefined value */
-      (recommendedArr !== undefined)
-        ? ( recommendedArr.map(curr => (
-             <a className="recommendations" href="https://en.wikipedia.org/wiki/{curr}">
-               {curr}
-             </a>)) )
-        : null
-      }
+      {/* Need to convert the name to a slug before providing it as a link, aparently seems to work without but might be limted to certain browsers. Not sure what converts it. Probably browser specific */}
+      <div className={styles.recContainer}> 
+        { /* ternary to not attempt to render the initial undefined value */
+        (recommendedArr !== undefined)
+          ? ( recommendedArr.map( (curr, index) => (
+              <a
+                key={index}
+                className={styles.recommendations}
+                target="_blank"
+                href={`https://en.wikipedia.org/wiki/${curr}`}>
+                {curr}
+              </a>)) )
+          : null
+        }
+      </div>
     </div>
   );
 }

@@ -70,3 +70,18 @@ body {
   /* visual guide */
   border: 1px solid black; 
 }
+
+.recContainer {
+	/* width to match the general thing and perhaps some padding, see if it's needed at all. Maybe the parent container already does the job. */
+}
+
+.recommendations {
+	display: flex;
+	flex-direction: column;
+	
+	/* padding: ; */
+	width: 240px;
+
+	text-decoration: none;
+	color: black;
+}

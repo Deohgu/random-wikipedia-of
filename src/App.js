@@ -41,6 +41,8 @@ const App = () => {
         inputDataSubmit={ () => submitData(inputData) }
       />
 
+      {/* Realised that recommendations are based on pages. Instead the recommendations have to replace the written text and then give a random category based on that. */}
+
       {/* Need to convert the name to a slug before providing it as a link, aparently seems to work without but might be limted to certain browsers. Not sure what converts it. Probably browser specific */}
       <div className={styles.recContainer}> 
         { /* ternary to not attempt to render the initial undefined value */

@@ -43,6 +43,9 @@ const App = () => {
       
       {/* To improve I can remove the B-Class and Uppercase the word after. Check the recommendations with B inputData */}
       
+      {/* The recommendations should also not only add to inputData but also search it straight away.
+      I've implemented that but it is not fully working, the search is giving undefined, meaning probably because inputData at the time is undefined, I have to console.log it */}
+      
       <div className={styles.recContainer}> 
         { /* ternary to not attempt to render the initial undefined value */
         (recommendedArr !== undefined)
@@ -51,10 +54,12 @@ const App = () => {
                 key={index}
                 className={styles.recommendations}
                 type="button"
-                onClick={ () => {
-                  setInputData(curr
+                onClick={ async () => {
+                  await setInputData(curr
                     .replace(/Category:/g, ""))
-                } }
+                  submitData(inputData)
+                }
+                }
               >
                 {curr
                   .replace(/Category:/g, "")

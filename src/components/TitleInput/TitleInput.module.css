@@ -1,8 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  width: 300px;
   align-items: center;
+  margin: 0 auto;
 }
 
 .title {
@@ -33,7 +33,7 @@ input {
   border: none;
   border-bottom: 1px solid black;
   
-  width: 100%;
+  width: 300px;
   padding: 0;
   margin: 4px 0 0 0;
 
@@ -43,13 +43,15 @@ input {
   color: inherit;
 }
 
-button {
+.searchButton {
   height: 47px;
   width: 47px;
   padding: 10px;
-  border: 2px solid black;
+  border: none;
   margin: 20px;
   border-radius: 100%;
+  
+  background-color: rgb(235, 199, 152);
 
   font-size: 20px;
 }

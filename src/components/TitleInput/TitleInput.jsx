@@ -15,7 +15,7 @@ const TitleInput = (props) => {
         <input
           action=""
           type="text"
-          placeholder="..."
+          placeholder=". . ."
           value={props.inputData}
           onChange={props.handleChange} 
         />
@@ -23,6 +23,7 @@ const TitleInput = (props) => {
         {/* The button must be the problem, it must be refreshing the page or something and losing the states! */}
         <button
           type="button" 
+          className={styles.searchButton}
           onClick={props.inputDataSubmit}
         >
           <i className={styles.icon} class="fa fa-search" aria-hidden="true"></i>

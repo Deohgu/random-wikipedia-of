@@ -65,7 +65,7 @@ body {
 	font-weight: 700;
 	
 	margin: 100px auto 0 auto;
-	width: max-content;
+	width: 350px;
 	
   /* visual guide */
   border: 1px solid black; 
@@ -75,13 +75,27 @@ body {
 	/* width to match the general thing and perhaps some padding, see if it's needed at all. Maybe the parent container already does the job. */
 }
 
+
+
 .recommendations {
 	display: flex;
 	flex-direction: column;
 	
+	background-color: rgb(255, 219, 172);
+	
 	/* padding: ; */
-	width: 240px;
+	border: none;
+	padding: 8px 12px;
+	width: 100%;
+	
+	font-size: 20px;
+	}
+	
+	.recommendations:not(:last-child) {
+	  border: 8px solid rgb(245, 209, 162);
+	  border-left: 0;
+	  border-right: 0;
+	  border-top: 0;
+	}
 
-	text-decoration: none;
-	color: black;
-}
+

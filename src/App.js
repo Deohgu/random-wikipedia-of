@@ -41,6 +41,7 @@ const App = () => {
         inputDataSubmit={ () => submitData(inputData) }
       />
       
+      {/* To improve I can remove the B-Class and Uppercase the word after. Check the recommendations with B inputData */}
       
       <div className={styles.recContainer}> 
         { /* ternary to not attempt to render the initial undefined value */

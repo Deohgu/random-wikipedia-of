@@ -43,6 +43,10 @@ input {
   color: inherit;
 }
 
+input:focus {
+  outline: none;
+}
+
 .textCursor {
   position: relative;
   top: 4px;
@@ -67,6 +71,10 @@ input {
 
 @keyframes blinker { 
   from { opacity: 1.0; } to { opacity: 0.0; }
+}
+
+input:focus + .textCursor {
+  display: none;
 }
 
 

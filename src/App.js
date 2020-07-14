@@ -11,10 +11,7 @@ const App = () => {
   const [ prevInputData, setPrevInputData ] = useState("")
   const [ recommendedArr, setRecommendedArr ] = useState([])
    
-  // useEffect is returning an array of recommended searches.
-  // In return we are rendering that array with .map to create several <a>.
-  // In CSS the <a> will be edited so that it shows neatly underneath like the codePen example.
-  
+  // useEffect is returning an array of recommended searches based on input and in return we are rendering that array with .map to create several recommendations in the form of buttons.
   useEffect(() => {
     const fetchedData = async () => {
     const dataTransf = await recommendedFunc(inputData);
@@ -41,6 +38,8 @@ const App = () => {
         inputDataSubmit={ () => submitData(inputData) }
       />
       
+      
+      {/* CURRENTLY HERE! */}
       {/* To improve I can remove the B-Class and Uppercase the word after. Check the recommendations with B inputData */}
       
       {/* The recommendations should also not only add to inputData but also search it straight away.
@@ -54,11 +53,13 @@ const App = () => {
                 key={index}
                 className={styles.recommendations}
                 type="button"
-                onClick={ async () => {
-                  await setInputData(curr
-                    .replace(/Category:/g, ""))
-                  submitData(inputData)
-                }
+                onClick={
+                  async () => {
+                    await setInputData(curr
+                      .replace(/Category:/g, ""));
+                    console.log(`${inputData}   ${curr}`);
+                    submitData(inputData);
+                  }
                 }
               >
                 {curr

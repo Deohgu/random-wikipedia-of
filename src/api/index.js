@@ -83,7 +83,7 @@ export const newSubCat = async () => {
 
 
 export const recommendedFunc = async (data) => {
-  const recomendedFetch = await fetch(`https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=8&namespace=14&suggest&search=${data}&origin=*`);
+  const recomendedFetch = await fetch(`https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=6&namespace=14&suggest&search=${data}&origin=*`);
   const recommendedData = await recomendedFetch.json(); // Can't seem to destructure it.
   return recommendedData[1];
 };

@@ -35,7 +35,7 @@ input {
   
   width: calc(100% - 2px);
   padding: 0;
-  margin: 4px 0 0 0;
+  margin: 4px 0 10px 0;
 
   /*outline: none;*/
 } ::placeholder {
@@ -47,47 +47,16 @@ input:focus {
   outline: none;
 }
 
-.textCursor {
-  position: relative;
-  top: 4px;
-  right: calc(50%);
+
+/*.searchButton {*/
+/*  height: 47px;*/
+/*  width: 47px;*/
+/*  padding: 10px;*/
+/*  border: none;*/
+/*  margin: 20px;*/
+/*  border-radius: 100%;*/
   
-  border-right: 2px solid black;
+/*  background-color: rgb(235, 199, 152);*/
 
-  animation-name: blinker;
-  animation-iteration-count: infinite;
-  animation-timing-function: cubic-bezier(1,0,0,1);
-  animation-duration: 1s;
-  /* Basic styling */
-  display: inline-block;
-  width: 0;
-  height: 43px;
-  /*top: 5px;*/
-  /*margin-left: 10px;*/
-  /*border-radius: 3px;*/
-  box-shadow: 0 0 100px rgba(white,.3);
-  background: $y;
-}
-
-@keyframes blinker { 
-  from { opacity: 1.0; } to { opacity: 0.0; }
-}
-
-input:focus + .textCursor {
-  display: none;
-}
-
-
-
-.searchButton {
-  height: 47px;
-  width: 47px;
-  padding: 10px;
-  border: none;
-  margin: 20px;
-  border-radius: 100%;
-  
-  background-color: rgb(235, 199, 152);
-
-  font-size: 20px;
-}
+/*  font-size: 20px;*/
+/*}*/

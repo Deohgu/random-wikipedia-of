@@ -4,6 +4,8 @@ import styles from './TitleInput.module.css';
 const TitleInput = (props) => {
   return (
     <div className={styles.container}>
+    
+     {/* The word random could be substituted for the result and a new wikipedia page is provided and be a link that the person could press. */}
       <h1 className={styles.title}>
         Random<br/>
         Wikipedia of
@@ -13,7 +15,11 @@ const TitleInput = (props) => {
       
       {/* See what else is required in the form if it is required at all */}
       <form 
-        onSubmit={ () => false}
+        onSubmit={ (event) => {
+          event.preventDefault();
+          props.inputDataSubmit();
+        } }
+        // action="javascript:void(0);"
       >
         <input
           action=""
@@ -21,26 +27,18 @@ const TitleInput = (props) => {
           placeholder=""
           value={props.inputData}
           onChange={props.handleChange} 
+          autoFocus
         />
-        
-        
-        <span
-          className={styles.textCursor}
-        >
-        </span>
-        
-        
-        
-        
+
         {/* Have the button work with enter key press */}
         {/* The button must be the problem, it must be refreshing the page or something and losing the states! */}
-        <button
+        {/* <button
           type="button" 
           className={styles.searchButton}
           onClick={props.inputDataSubmit}
         >
           <i className={styles.icon} class="fa fa-search" aria-hidden="true"></i>
-        </button>
+        </button> */}
       </form>
     </div>
   )

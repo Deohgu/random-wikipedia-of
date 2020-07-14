@@ -13,7 +13,7 @@ let subCats = [];
 
 
 const fetchPush = async (category) => {
-  const urlFetch = await fetch(url);
+  const urlFetch = await fetch(url + '&origin=*');
   const { query: { categorymembers } } = await urlFetch.json();
   
   for await (const element of categorymembers) {
@@ -83,7 +83,7 @@ export const newSubCat = async () => {
 
 
 export const recommendedFunc = async (data) => {
-  const recomendedFetch = await fetch(`https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=8&namespace=14&suggest&search=${data}`);
+  const recomendedFetch = await fetch(`https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=8&namespace=14&suggest&search=${data}` + '&origin=*');
   const recommendedData = await recomendedFetch.json(); // Can't seem to destructure it.
   return recommendedData[1];
 };

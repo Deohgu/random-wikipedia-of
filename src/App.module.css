@@ -61,11 +61,12 @@ body {
 }
 
 .container {
+	font-family: 'Oswald';
   font-size: 40px;
 	font-weight: 700;
 	
 	margin: 100px auto 0 auto;
-	width: 350px;
+	width: 250px;
 	
   /* visual guide */
   border: 1px solid black; 

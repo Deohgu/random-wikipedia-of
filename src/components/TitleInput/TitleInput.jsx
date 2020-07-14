@@ -7,8 +7,7 @@ const TitleInput = (props) => {
     
      {/* The word random could be substituted for the result and a new wikipedia page is provided and be a link that the person could press. */}
       <h1 className={styles.title}>
-        Random<br/>
-        Wikipedia of
+        RANDOM WIKIPEDIA PAGE OF THE
       </h1>
       
       {/* Have it focus on the input field when the page is loaded and everything being done with enter */}
@@ -40,6 +39,9 @@ const TitleInput = (props) => {
           <i className={styles.icon} class="fa fa-search" aria-hidden="true"></i>
         </button> */}
       </form>
+      <h1 className={styles.title}>
+        CATEGORY.
+      </h1>
     </div>
   )
 }

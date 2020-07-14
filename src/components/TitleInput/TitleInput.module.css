@@ -1,13 +1,19 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   margin: 0 auto;
 }
 
 .title {
-  text-align: center;
+  font-family: 'Oswald';
+  /* text-align: center; */
   margin: 20px 0 0 0;
+  /* text-align: justify; */
+  letter-spacing: .6px;
+}
+.title:last-child {
+  margin: 0;
 }
 
 form {
@@ -21,21 +27,20 @@ form {
 }
 
 input {
-  /* display: flex; */
 
 
-  /* font-family: inherit; */
+  font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
-  text-align: center;
+  /* text-align: center; */
 
   background-color: transparent;
   border: none;
   border-bottom: 1px solid black;
   
-  width: calc(100% - 2px);
+  width: 100%;
   padding: 0;
-  margin: 4px 0 10px 0;
+  margin-top: -10px;
 
   /*outline: none;*/
 } ::placeholder {

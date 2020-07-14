@@ -8,6 +8,9 @@ const TitleInput = (props) => {
         Random<br/>
         Wikipedia of
       </h1>
+      
+      {/* Have it focus on the input field when the page is loaded and everything being done with enter */}
+      
       {/* See what else is required in the form if it is required at all */}
       <form 
         onSubmit={ () => false}
@@ -15,10 +18,20 @@ const TitleInput = (props) => {
         <input
           action=""
           type="text"
-          placeholder=". . ."
+          placeholder=""
           value={props.inputData}
           onChange={props.handleChange} 
         />
+        
+        
+        <span
+          className={styles.textCursor}
+        >
+        </span>
+        
+        
+        
+        
         {/* Have the button work with enter key press */}
         {/* The button must be the problem, it must be refreshing the page or something and losing the states! */}
         <button

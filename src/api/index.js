@@ -13,7 +13,7 @@ let subCats = [];
 
 
 const fetchPush = async (category) => {
-  const urlFetch = await fetch(url + '&origin=*');
+  const urlFetch = await fetch(url);
   const { query: { categorymembers } } = await urlFetch.json();
   
   for await (const element of categorymembers) {
@@ -39,7 +39,7 @@ export const newCat = async (category) => {
 
   console.log(`newCat as been invoked`);
 
-  url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${category}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat`;
+  url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${category}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat&origin=*`;
 
   await fetchPush(category);
 
@@ -55,7 +55,7 @@ export const newSubCat = async () => {
   subCats.splice(randomSubCatIndex, 1);
   
   // Global category doesn't seem to work so I am changing the url here.
-  url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${randomSubCat}&cmprop=title|type&format=json&cmlimit=500&cmtype=page`;
+  url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${randomSubCat}&cmprop=title|type&format=json&cmlimit=500&cmtype=page&origin=*`;
 
   await fetchPush();
   
@@ -83,7 +83,7 @@ export const newSubCat = async () => {
 
 
 export const recommendedFunc = async (data) => {
-  const recomendedFetch = await fetch(`https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=8&namespace=14&suggest&search=${data}` + '&origin=*');
+  const recomendedFetch = await fetch(`https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=8&namespace=14&suggest&search=${data}&origin=*`);
   const recommendedData = await recomendedFetch.json(); // Can't seem to destructure it.
   return recommendedData[1];
 };

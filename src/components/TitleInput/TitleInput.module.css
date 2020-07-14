@@ -8,8 +8,6 @@
 .title {
   font-family: 'Oswald';
 
-  margin: 20px 0 0 0;
-
   letter-spacing: .6px;
 }
 .title:last-child {

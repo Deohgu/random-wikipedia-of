@@ -67,7 +67,8 @@ body {
 	
 	margin: 100px auto 0 auto;
 	/* visual guide */
-  /*border: 1px solid black;*/
+  border-left: 10px solid black;
+  padding-left: 20px;
 	width: 250px;
 }
 

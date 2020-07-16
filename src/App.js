@@ -50,10 +50,12 @@ const App = () => {
       
       
       {/* CURRENTLY HERE! */}
+      
+      {/* https://reactgo.com/react-focus-input/
+      Need to set the focus after pressing the recommendations button, according to this I can invoke a function on the button click for it */}
+      
       {/* To improve I can remove the B-Class and Uppercase the word after. Check the recommendations with B inputData */}
       
-      {/* The recommendations should also not only add to inputData but also search it straight away.
-      I've implemented that but it is not fully working, the search is giving undefined, meaning probably because inputData at the time is undefined, I have to console.log it */}
       
       {/* https://stackoverflow.com/questions/54069253/usestate-set-method-not-reflecting-change-immediately
       According to this it means that states are only updated after each render, in this case because the function is within another function meaning a closure the state is still undefined. The fix is to always use useEffect for these fetches, only not when we need to get another random result. But maybe even then it would work with if statments on the useEffect, I just cannot be updating states there for some reason. */}

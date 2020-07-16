@@ -7,18 +7,28 @@ import { newCat, newSubCat, recommendedFunc } from './api';
 
 const App = () => {
 
-  const [ inputData, setInputData ] = useState("")
-  const [ prevInputData, setPrevInputData ] = useState("")
-  const [ recommendedArr, setRecommendedArr ] = useState([])
-   
+  const [ inputData, setInputData ] = useState("");
+  const [ prevInputData, setPrevInputData ] = useState("");
+  const [ recommendedArr, setRecommendedArr ] = useState([]);
+  const [ recomPressed, setRecomPressed ] = useState(false);
+
   // useEffect is returning an array of recommended searches based on input and in return we are rendering that array with .map to create several recommendations in the form of buttons.
   useEffect(() => {
     const fetchedData = async () => {
     const dataTransf = await recommendedFunc(inputData);
     setRecommendedArr(dataTransf)
-   };
-   fetchedData();
+  };
+    fetchedData();
   }, [inputData]);
+  
+  useEffect( () => {
+    console.log(`inputData = ${inputData}, recomPressed = ${recomPressed}`);
+    if (recomPressed === true) {
+      submitData(inputData);
+    }
+    setRecomPressed(false);
+
+  }, [recomPressed === true]);
 
   const submitData = async (dataToFetch) => {
     if (dataToFetch !== "" && dataToFetch !== prevInputData) {
@@ -45,6 +55,9 @@ const App = () => {
       {/* The recommendations should also not only add to inputData but also search it straight away.
       I've implemented that but it is not fully working, the search is giving undefined, meaning probably because inputData at the time is undefined, I have to console.log it */}
       
+      {/* https://stackoverflow.com/questions/54069253/usestate-set-method-not-reflecting-change-immediately
+      According to this it means that states are only updated after each render, in this case because the function is within another function meaning a closure the state is still undefined. The fix is to always use useEffect for these fetches, only not when we need to get another random result. But maybe even then it would work with if statments on the useEffect, I just cannot be updating states there for some reason. */}
+      
       <div className={styles.recContainer}> 
         { /* ternary to not attempt to render the initial undefined value */
         (recommendedArr !== undefined)
@@ -55,10 +68,8 @@ const App = () => {
                 type="button"
                 onClick={
                   async () => {
-                    await setInputData(curr
-                      .replace(/Category:/g, ""));
-                    console.log(`${inputData}   ${curr}`);
-                    submitData(inputData);
+                    await setInputData( curr.replace(/Category:/g, ""));
+                    setRecomPressed(true);
                   }
                 }
               >

@@ -15,6 +15,10 @@
   margin: 0;
 }
 
+.randomPageTitle {
+  color: inherit;
+}
+
 form {
   display: flex;
   align-content: center;

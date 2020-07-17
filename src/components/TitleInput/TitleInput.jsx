@@ -7,7 +7,15 @@ const TitleInput = (props) => {
     
      {/* The word random could be substituted for the result and a new wikipedia page is provided and be a link that the person could press. */}
       <h1 className={styles.title}>
-        { props.randomPageTitle } WIKIPEDIA PAGE OF THE
+        { (props.randomPageTitle === "Random")
+        ? props.randomPageTitle + " "
+        : <a
+          href={"https://en.wikipedia.org/wiki/" + props.randomPageTitle}
+          className={styles.randomPageTitle}
+          >
+        {props.randomPageTitle + " "}
+        </a> }
+        WIKIPEDIA PAGE OF THE
       </h1>
       
       {/* Have it focus on the input field when the page is loaded and everything being done with enter */}

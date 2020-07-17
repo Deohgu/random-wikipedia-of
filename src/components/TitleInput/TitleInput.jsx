@@ -12,6 +12,7 @@ const TitleInput = (props) => {
         : <a
           href={"https://en.wikipedia.org/wiki/" + props.randomPageTitle}
           className={styles.randomPageTitle}
+          target="_blank"
           >
         {props.randomPageTitle + " "}
         </a> }

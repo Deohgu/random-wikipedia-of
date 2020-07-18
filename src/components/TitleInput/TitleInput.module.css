@@ -7,11 +7,16 @@
 
 .title {
   font-family: 'Oswald';
+  text-transform: uppercase;
 
   letter-spacing: .6px;
 }
 .title:last-child {
   margin: 0;
+}
+
+.randomPageTitle {
+  color: inherit;
 }
 
 form {

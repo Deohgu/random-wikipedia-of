@@ -11,12 +11,13 @@ const App = () => {
   const [ prevInputData, setPrevInputData ] = useState("");
   const [ recommendedArr, setRecommendedArr ] = useState([]);
   const [ recomPressed, setRecomPressed ] = useState(false);
+  const [ randomPage, setRandomPage ] = useState("Random");
 
   // useEffect is returning an array of recommended searches based on input and in return we are rendering that array with .map to create several recommendations in the form of buttons.
   useEffect(() => {
     const fetchedData = async () => {
     const dataTransf = await recommendedFunc(inputData);
-    setRecommendedArr(dataTransf)
+    setRecommendedArr(dataTransf);
   };
     fetchedData();
   }, [inputData]);
@@ -31,12 +32,15 @@ const App = () => {
   }, [recomPressed === true]);
 
   const submitData = async (dataToFetch) => {
+    let fetchedData = "";
     if (dataToFetch !== "" && dataToFetch !== prevInputData) {
-      await newCat(dataToFetch.replace(/[" "]/g, "_"));
+      fetchedData = await newCat(dataToFetch.replace(/[" "]/g, "_"));
+      console.log(`fetched data inside first if statment = ${fetchedData}`)
       setPrevInputData(dataToFetch);
     } else if (dataToFetch !== "" && dataToFetch === prevInputData) {
-      await newSubCat(dataToFetch.replace(/[" "]/g, "_"));
+      fetchedData = await newSubCat(dataToFetch.replace(/[" "]/g, "_"));
     }
+    setRandomPage(fetchedData);
   }
 
 
@@ -46,6 +50,7 @@ const App = () => {
         inputData={ inputData }
         handleChange={ (e) => setInputData(e.target.value) } 
         inputDataSubmit={ () => submitData(inputData) }
+        randomPageTitle={ randomPage }
       />
       
       

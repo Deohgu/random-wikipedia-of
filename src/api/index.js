@@ -43,7 +43,7 @@ export const newCat = async (category) => {
 
   await fetchPush(category);
 
-  await newSubCat();
+  return newSubCat();
   
 };
 
@@ -71,7 +71,8 @@ export const newSubCat = async () => {
   // console.log(`categorymembers ${categorymembers}`);
   console.log(`Random Page = ${randomPage}`);
   
-  return randomPage;
+  return randomPage
+    .replace(/["_"]/g, " ");
 };
 
 

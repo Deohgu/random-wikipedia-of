@@ -6,10 +6,10 @@
 }
 
 .title {
-  font-family: 'Oswald';
+  font-family: "Oswald";
   text-transform: uppercase;
 
-  letter-spacing: .6px;
+  letter-spacing: 0.6px;
 }
 .title:last-child {
   margin: 0;
@@ -37,16 +37,42 @@ input {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid black;
-  
+
   width: 100%;
   height: 40px;
   padding: 0;
-
-} ::placeholder {
+}
+::placeholder {
   font-family: roboto;
   color: inherit;
 }
 
 input:focus {
   outline: none;
+}
+
+.recContainer {
+  /* width to match the general thing and perhaps some padding, see if it's needed at all. Maybe the parent container already does the job. */
+
+  margin-top: 20px;
+}
+
+.recommendations {
+  display: flex;
+  flex-direction: column;
+
+  background-color: rgb(245, 209, 162);
+
+  border: none;
+  padding: 8px 12px;
+  width: 100%;
+
+  font-size: 20px;
+}
+
+.recommendations:not(:last-child) {
+  border: 8px solid rgb(255, 219, 172);
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
 }

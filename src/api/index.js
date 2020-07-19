@@ -28,8 +28,6 @@ export const newCat = async (category) => {
   pages = [];
   subCats = [];
 
-  console.log(`newCat as been invoked`);
-
   url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${category}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat&origin=*`;
 
   await fetchPush(category);
@@ -54,8 +52,6 @@ export const newSubCat = async () => {
   const randomPage = pages[randomPageIndex];
   // Removing the article page so that it won't be re-picked
   pages.splice(randomPageIndex, 1);
-
-  console.log(`Random Page = ${randomPage}`);
 
   return randomPage.replace(/["_"]/g, " ");
 };

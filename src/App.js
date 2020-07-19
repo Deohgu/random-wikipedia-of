@@ -22,7 +22,6 @@ const App = () => {
   }, [inputData]);
 
   useEffect(() => {
-    console.log(`inputData = ${inputData}, recomPressed = ${recomPressed}`);
     if (recomPressed === true) {
       submitData(inputData);
     }
@@ -33,7 +32,6 @@ const App = () => {
     let fetchedData = "";
     if (dataToFetch !== "" && dataToFetch !== prevInputData) {
       fetchedData = await newCat(dataToFetch.replace(/[" "]/g, "_"));
-      console.log(`fetched data inside first if statment = ${fetchedData}`);
       setPrevInputData(dataToFetch);
     } else if (dataToFetch !== "" && dataToFetch === prevInputData) {
       fetchedData = await newSubCat(dataToFetch.replace(/[" "]/g, "_"));

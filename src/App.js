@@ -43,9 +43,9 @@ const App = () => {
 
   const searchInput = useRef(null);
 
-  // function handleFocus() {
-  //   searchInput.current.focus();
-  // }
+  const handleFocus = () => {
+    searchInput.current.focus();
+  };
 
   return (
     <div className={styles.container}>
@@ -57,7 +57,8 @@ const App = () => {
         recommendedArr={recommendedArr}
         setInputData={setInputData}
         setRecomPressed={setRecomPressed}
-        // handleFocus={handleFocus()}
+        handleFocus={handleFocus}
+        searchInput={searchInput}
       />
     </div>
   );

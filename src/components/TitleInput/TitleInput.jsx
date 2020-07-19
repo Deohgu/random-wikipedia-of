@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./TitleInput.module.css";
-import App from "/home/diogo/Documents/Development/random-wikipedia-of/src/App.js";
 
 const TitleInput = (props) => {
   return (
@@ -34,7 +33,7 @@ const TitleInput = (props) => {
           value={props.inputData}
           onChange={props.handleChange}
           autoFocus
-          // ref={searchInput}
+          ref={props.searchInput}
         />
       </form>
       <h1 className={styles.title}>CATEGORY.</h1>
@@ -59,7 +58,7 @@ const TitleInput = (props) => {
                   onClick={async () => {
                     props.setInputData(curr.replace(/Category:/g, ""));
                     props.setRecomPressed(true);
-                    // props.handleFocus();
+                    props.handleFocus();
                   }}
                 >
                   {curr.replace(/Category:/g, "")}

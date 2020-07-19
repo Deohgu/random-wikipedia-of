@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/random-wikipedia-of/static/css/main.53abaa7e.chunk.css",
+    "main.css": "/random-wikipedia-of/static/css/main.f770c5f2.chunk.css",
     "main.js": "/random-wikipedia-of/static/js/main.7e7d2b26.chunk.js",
     "main.js.map": "/random-wikipedia-of/static/js/main.7e7d2b26.chunk.js.map",
     "runtime-main.js": "/random-wikipedia-of/static/js/runtime-main.4b8e4a77.js",
@@ -8,15 +8,15 @@
     "static/js/2.9f7151d6.chunk.js": "/random-wikipedia-of/static/js/2.9f7151d6.chunk.js",
     "static/js/2.9f7151d6.chunk.js.map": "/random-wikipedia-of/static/js/2.9f7151d6.chunk.js.map",
     "index.html": "/random-wikipedia-of/index.html",
-    "precache-manifest.5e6d7df3898c9b1ae3c64671047fdd1e.js": "/random-wikipedia-of/precache-manifest.5e6d7df3898c9b1ae3c64671047fdd1e.js",
+    "precache-manifest.a61c140bf7537b6c1d5d467a1e53d2e3.js": "/random-wikipedia-of/precache-manifest.a61c140bf7537b6c1d5d467a1e53d2e3.js",
     "service-worker.js": "/random-wikipedia-of/service-worker.js",
-    "static/css/main.53abaa7e.chunk.css.map": "/random-wikipedia-of/static/css/main.53abaa7e.chunk.css.map",
+    "static/css/main.f770c5f2.chunk.css.map": "/random-wikipedia-of/static/css/main.f770c5f2.chunk.css.map",
     "static/js/2.9f7151d6.chunk.js.LICENSE.txt": "/random-wikipedia-of/static/js/2.9f7151d6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4b8e4a77.js",
     "static/js/2.9f7151d6.chunk.js",
-    "static/css/main.53abaa7e.chunk.css",
+    "static/css/main.f770c5f2.chunk.css",
     "static/js/main.7e7d2b26.chunk.js"
   ]
 }

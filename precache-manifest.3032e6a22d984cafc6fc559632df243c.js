@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "739c12549fd4f4023e0f9994fe620a89",
+    "revision": "867cc419eb4ab5319bf276c35cd76714",
     "url": "/random-wikipedia-of/index.html"
   },
   {
-    "revision": "920445c433ad17e60382",
-    "url": "/random-wikipedia-of/static/css/main.f770c5f2.chunk.css"
+    "revision": "560a0031b7308aaa5c71",
+    "url": "/random-wikipedia-of/static/css/main.42ae5898.chunk.css"
   },
   {
     "revision": "ed9cd10366eed6ed6ce9",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/random-wikipedia-of/static/js/2.9f7151d6.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "920445c433ad17e60382",
+    "revision": "560a0031b7308aaa5c71",
     "url": "/random-wikipedia-of/static/js/main.7e7d2b26.chunk.js"
   },
   {

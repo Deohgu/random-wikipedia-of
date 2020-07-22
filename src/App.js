@@ -63,3 +63,10 @@ const App = () => {
 };
 
 export default App;
+
+
+// Delete after
+// Done - Need to change the text to the planned one on evernote.
+// Done - Need to change the top margin when on the phone
+// Done - Need to change the bottom margin of the container where CATEGORY is, remove there and add to the recommendations container instead (mostly for the black bar at the moment)
+// Need to have a way to search the results without a subcategory,maybe for now use a secrect key. that calls a funtion with sub cats just to use on things like COnspiracy Theories.

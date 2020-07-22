@@ -138,12 +138,20 @@ body {
 
 .container {
   font-family: "Oswald";
-  font-size: 40px;
+  font-size: 45px;
   font-weight: 700;
 
-  margin: 100px auto 0 auto;
+  margin: 30px auto 0 auto;
   /* visual guide */
   border-left: 10px solid black;
   padding-left: 20px;
-  width: 250px;
+  /* Back to 250px if not going to use justigy */
+  width: 255px;
 }
+
+@media (min-width: 700px) {
+  .container {
+    margin-top: 100px;
+  }
+}
+

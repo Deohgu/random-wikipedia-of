@@ -21,9 +21,10 @@
   font-family: "Oswald";
   text-transform: uppercase;
   /* Test with actual font and see how it works, if not good check back on the app container width */
-  text-align: justify;
+  /*text-align: justify;*/
+  word-spacing: 1px;
 
-  letter-spacing: 0.6px;
+  letter-spacing: 0.1px;
 }
 .title:last-child {
   margin: 0;

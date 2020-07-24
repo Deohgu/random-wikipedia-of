@@ -20,6 +20,8 @@
 .title {
   font-family: "Oswald";
   text-transform: uppercase;
+  /* Test with actual font and see how it works, if not good check back on the app container width */
+  text-align: justify;
 
   letter-spacing: 0.6px;
 }
@@ -44,7 +46,7 @@ form {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 
-  width: 80%;
+  width: 100%;
 }
 
 input {
@@ -89,8 +91,6 @@ input:focus {
 
 .recContainer {
   /* width to match the general thing and perhaps some padding, see if it's needed at all. Maybe the parent container already does the job. */
-
-  margin-top: 20px;
 }
 
 .recommendations {
@@ -109,6 +109,12 @@ input:focus {
   width: 100%;
 
   font-size: 20px;
+}
+
+/* Check of this looks the same as adding to .recContainer, if so this serves the purpose of not showing any empty space underneath CATEGORY. whilst there is no recommendations */
+
+.recommendations:first-child {
+  margin-top: 20px;
 }
 
 .recommendations:not(:last-child) {

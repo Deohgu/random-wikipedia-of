@@ -6,7 +6,7 @@ const TitleInput = (props) => {
   // Enables me to use multiple elements in the ternary operator.
   const componentToRenderTwo = (
       <>
-            YOU HAVE THE HYPERLINKED {" "}
+            YOU HAVE THE linked {" "}
           <a
             href={"https://en.wikipedia.org/wiki/" + props.randomPageTitle}
             className={styles.randomPageTitle}

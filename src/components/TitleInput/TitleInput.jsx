@@ -2,6 +2,19 @@ import React from "react";
 import styles from "./TitleInput.module.css";
 
 const TitleInput = (props) => {
+  
+  // Enables me to use multiple elements in the ternary operator.
+  const componentToRenderTwo = (
+      <>
+            YOU HAVE THE HYPERLINKED {" "}
+          <a
+            href={"https://en.wikipedia.org/wiki/" + props.randomPageTitle}
+            className={styles.randomPageTitle}
+          >
+            {props.randomPageTitle}
+          </a>
+      </>);
+  
   return (
     <div className={styles.container}>
       {/* Link needs to be more obvious. */}
@@ -26,52 +39,13 @@ const TitleInput = (props) => {
           ref={props.searchInput}
         />
       </form>
-      <h1 className={styles.title}> 
+      <h1 className={styles.title}>
         {props.randomPageTitle === "Random" ? (
           "YOU WILL BE PROVIDED A " + props.randomPageTitle + " "
         ) : (
-          <a
-            href={"https://en.wikipedia.org/wiki/" + props.randomPageTitle}
-            className={styles.randomPageTitle}
-          >
-            {"YOU HAVE THE HYPERLINKED " + props.randomPageTitle} + " "
-          </a>
+          componentToRenderTwo
         )}
-      ARTICLE.</h1>
-      
-      
-      
-      {/* <h1 className={styles.title}>
-        {props.randomPageTitle === "Random" ? (
-          props.randomPageTitle + " "
-        ) : (
-          <a
-            href={"https://en.wikipedia.org/wiki/" + props.randomPageTitle}
-            className={styles.randomPageTitle}
-          >
-            {props.randomPageTitle + " "}
-          </a>
-        )}
-        WIKIPEDIA PAGE OF THE
-      </h1>
-
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          props.inputDataSubmit();
-        }}
-      >
-        <input
-          action=""
-          type="text"
-          placeholder=""
-          value={props.inputData}
-          onChange={props.handleChange}
-          autoFocus
-          ref={props.searchInput}
-        />
-      </form>
-      <h1 className={styles.title}>CATEGORY.</h1> */}
+      {" "} ARTICLE.</h1>
 
       {/* https://reactgo.com/react-focus-input/
       Need to set the focus after pressing the recommendations button, according to this I can invoke a function on the button click for it */}

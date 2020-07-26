@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/random-wikipedia-of/static/css/main.fec62c13.chunk.css",
-    "main.js": "/random-wikipedia-of/static/js/main.8a26e72d.chunk.js",
-    "main.js.map": "/random-wikipedia-of/static/js/main.8a26e72d.chunk.js.map",
+    "main.css": "/random-wikipedia-of/static/css/main.e9fe091f.chunk.css",
+    "main.js": "/random-wikipedia-of/static/js/main.aeab4b3b.chunk.js",
+    "main.js.map": "/random-wikipedia-of/static/js/main.aeab4b3b.chunk.js.map",
     "runtime-main.js": "/random-wikipedia-of/static/js/runtime-main.4b8e4a77.js",
     "runtime-main.js.map": "/random-wikipedia-of/static/js/runtime-main.4b8e4a77.js.map",
     "static/js/2.9f7151d6.chunk.js": "/random-wikipedia-of/static/js/2.9f7151d6.chunk.js",
     "static/js/2.9f7151d6.chunk.js.map": "/random-wikipedia-of/static/js/2.9f7151d6.chunk.js.map",
     "index.html": "/random-wikipedia-of/index.html",
-    "precache-manifest.c712e8a82939cd72c6e957a6c39c3f52.js": "/random-wikipedia-of/precache-manifest.c712e8a82939cd72c6e957a6c39c3f52.js",
+    "precache-manifest.2c62862a96dccd2468c7297a66c0a42a.js": "/random-wikipedia-of/precache-manifest.2c62862a96dccd2468c7297a66c0a42a.js",
     "service-worker.js": "/random-wikipedia-of/service-worker.js",
-    "static/css/main.fec62c13.chunk.css.map": "/random-wikipedia-of/static/css/main.fec62c13.chunk.css.map",
+    "static/css/main.e9fe091f.chunk.css.map": "/random-wikipedia-of/static/css/main.e9fe091f.chunk.css.map",
     "static/js/2.9f7151d6.chunk.js.LICENSE.txt": "/random-wikipedia-of/static/js/2.9f7151d6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4b8e4a77.js",
     "static/js/2.9f7151d6.chunk.js",
-    "static/css/main.fec62c13.chunk.css",
-    "static/js/main.8a26e72d.chunk.js"
+    "static/css/main.e9fe091f.chunk.css",
+    "static/js/main.aeab4b3b.chunk.js"
   ]
 }

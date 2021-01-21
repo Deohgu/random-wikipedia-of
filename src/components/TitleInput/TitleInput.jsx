@@ -1,80 +1,83 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "./TitleInput.module.css";
 
-const TitleInput = (props) => {
-  
+const TitleInput = ({
+  inputData,
+  handleInputData,
+  inputDataSubmit,
+  randomPageTitle,
+  recommendedArr,
+  setInputData,
+  handleFetch,
+}) => {
+  const searchInput = useRef(null);
+
   // Enables me to use multiple elements in the ternary operator.
   const componentToRenderTwo = (
-      <>
-            YOU HAVE THE linked {" "}
-          <a
-            href={"https://en.wikipedia.org/wiki/" + props.randomPageTitle}
-            className={styles.randomPageTitle}
-          >
-            {props.randomPageTitle}
-          </a>
-      </>);
-  
+    <>
+      YOU HAVE THE linked{" "}
+      <a
+        href={"https://en.wikipedia.org/wiki/" + randomPageTitle}
+        className={styles.randomPageTitle}
+      >
+        {randomPageTitle}
+      </a>
+    </>
+  );
+
   return (
     <div className={styles.container}>
       {/* Link needs to be more obvious. */}
-      
-      <h1 className={styles.title}>
-        WITHIN THE WIKIPEDIA CATEGORY OF
-      </h1>
+
+      <h1 className={styles.title}>WITHIN THE WIKIPEDIA CATEGORY OF</h1>
 
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          props.inputDataSubmit();
+          inputDataSubmit();
+          handleFetch();
         }}
       >
         <input
           action=""
           type="text"
           placeholder=""
-          value={props.inputData}
-          onChange={props.handleChange}
+          value={inputData}
+          onChange={(e) => {
+            handleInputData(e.target.value);
+            handleFetch(e.target.value);
+          }} // Fetches the API when a new character is inserted
           autoFocus
-          ref={props.searchInput}
+          ref={searchInput}
         />
       </form>
       <h1 className={styles.title}>
-        {props.randomPageTitle === "Random" ? (
-          "YOU WILL BE PROVIDED A " + props.randomPageTitle + " "
-        ) : (
-          componentToRenderTwo
-        )}
-      {" "} ARTICLE.</h1>
-
-      {/* https://reactgo.com/react-focus-input/
-      Need to set the focus after pressing the recommendations button, according to this I can invoke a function on the button click for it */}
-
-      {/* To improve I can remove the B-Class and Uppercase the word after. Check the recommendations with B inputData */}
+        {randomPageTitle === "Random"
+          ? `YOU WILL BE PROVIDED A ${randomPageTitle} `
+          : componentToRenderTwo + " "}
+        ARTICLE.
+      </h1>
 
       {/* https://stackoverflow.com/questions/54069253/usestate-set-method-not-reflecting-change-immediately
       According to this it means that states are only updated after each render, in this case because the function is within another function meaning a closure the state is still undefined. The fix is to always use useEffect for these fetches, only not when we need to get another random result. But maybe even then it would work with if statments on the useEffect, I just cannot be updating states there for some reason. */}
 
       <div className={styles.recContainer}>
-        {
-          /* ternary to not attempt to render the initial undefined value */
-          props.recommendedArr !== undefined
-            ? props.recommendedArr.map((curr, index) => (
-                <button
-                  key={index}
-                  className={styles.recommendations}
-                  type="button"
-                  onClick={async () => {
-                    props.setInputData(curr.replace(/Category:/g, ""));
-                    props.setRecomPressed(true);
-                    props.handleFocus();
-                  }}
-                >
-                  {curr.replace(/Category:/g, "")}
-                </button>
-              ))
-            : null
-        }
+        {recommendedArr.length > 0 &&
+          recommendedArr.map((curr, index) => (
+            <button
+              key={`recommended${index}`}
+              className={styles.recommendations}
+              type="button"
+              onClick={async () => {
+                setInputData(curr.title);
+                inputDataSubmit(curr.title);
+                handleFetch();
+                searchInput.current.focus();
+              }}
+            >
+              {curr.title}
+            </button>
+          ))}
       </div>
     </div>
   );

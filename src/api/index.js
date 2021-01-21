@@ -1,5 +1,6 @@
-// To do here:
 // If the picked subcat has no pages (probably only subcats) fetch a level deeper?  In total it's first Category Fetch, second SubCat fetch, and third random subCat fetch. For a new random it's simply 2 fetches. So not that many unless you're very unlucky.
+
+// Need to have a way to search the results without a subcategory,maybe for now use a secrect key. that calls a funtion with sub cats just to use on things like COnspiracy Theories.
 
 let url = "";
 let pages = [];
@@ -56,13 +57,18 @@ export const newSubCat = async () => {
   return randomPage.replace(/["_"]/g, " ");
 };
 
-///////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////
-
+// In the future the app might call another more complex function to clean the results
+// Such as B-Class and Uppercase the word after. Check wikipedia for other variants
 export const recommendedFunc = async (data) => {
   const recomendedFetch = await fetch(
     `https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=6&namespace=14&suggest&search=${data}&origin=*`
   );
-  const recommendedData = await recomendedFetch.json(); // Can't seem to destructure it.
-  return recommendedData[1];
+  const jsonData = await recomendedFetch.json();
+  const parsedData = await jsonData[1].map((curr, index) => {
+    return {
+      title: curr.replace(/Category:/g, ""),
+      url: jsonData[3][index],
+    };
+  });
+  return parsedData;
 };

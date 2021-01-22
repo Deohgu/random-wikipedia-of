@@ -5,26 +5,14 @@ import styles from "./App.module.css";
 
 import { newCat, newSubCat, recommendedFunc } from "./api";
 
+// Currently need to clean the mixture of using handleFetch and inputData.
+
 const App = () => {
   const [inputData, setInputData] = useState("");
   const [prevInputData, setPrevInputData] = useState("");
   const [recommendedArr, setRecommendedArr] = useState([]);
   const [randomPage, setRandomPage] = useState("Random");
 
-  // useEffect is returning an array of recommended searches based on input and in return we are rendering that array with .map to create several recommendations in the form of buttons.
-  // useEffect(() => {
-  //   if (inputData !== "") {
-  //     const fetchedData = async () => {
-  //       const dataTransf = await recommendedFunc(inputData);
-  //       setRecommendedArr(dataTransf);
-  //     };
-  //     fetchedData();
-  //   }
-  // }, [inputData]);
-
-  // console.log(recommendedArr);
-
-  // CURENTLY HERE. Trying to figure how to call this by pressing the recommendations.
   const submitData = async (dataToFetch) => {
     let fetchedData = "";
     if (dataToFetch !== "" && dataToFetch !== prevInputData) {
@@ -46,7 +34,7 @@ const App = () => {
       <TitleInput
         inputData={inputData}
         handleInputData={(input) => setInputData(input)}
-        inputDataSubmit={() => submitData(inputData)}
+        submitData={(receivedData) => submitData(receivedData)}
         randomPageTitle={randomPage}
         recommendedArr={recommendedArr}
         setInputData={setInputData}

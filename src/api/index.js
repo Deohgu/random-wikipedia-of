@@ -6,18 +6,18 @@ let url = "";
 let pages = [];
 let subCats = [];
 
-const fetchPush = async (category) => {
-  const urlFetch = await fetch(url);
+const fetchPush = async (urlWithCat) => {
+  const urlFetch = await fetch(urlWithCat);
   const {
     query: { categorymembers },
   } = await urlFetch.json();
 
   for await (const element of categorymembers) {
     if (element.type === "page") {
-      pages.push(element.title.replace(/[" "]/g, "_"));
+      pages.push(element.title.replace(/[" "]/g, "_")); // articles/pages to pages array
     } else {
       subCats.push(
-        element.title.replace(/Category:/g, "").replace(/[" "]/g, "_")
+        element.title.replace(/Category:/g, "").replace(/[" "]/g, "_") // categories of main category/subCats to subCats array
       );
     }
   }
@@ -31,7 +31,7 @@ export const newCat = async (category) => {
 
   url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${category}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat&origin=*`;
 
-  await fetchPush(category);
+  await fetchPush(url);
 
   return newSubCat();
 };
@@ -40,13 +40,14 @@ export const newCat = async (category) => {
 export const newSubCat = async () => {
   const randomSubCatIndex = Math.floor(Math.random() * subCats.length);
   const randomSubCat = subCats[randomSubCatIndex];
+  console.log(`testing subCats[0]: ${subCats[0]}`)
   // Removing the subCat so that it won't be re-picked.
   subCats.splice(randomSubCatIndex, 1);
 
   // Global category doesn't seem to work so I am changing the url here.
   url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${randomSubCat}&cmprop=title|type&format=json&cmlimit=500&cmtype=page&origin=*`;
 
-  await fetchPush();
+  await fetchPush(url);
 
   // Random article in pages
   const randomPageIndex = Math.floor(Math.random() * pages.length);
@@ -54,6 +55,8 @@ export const newSubCat = async () => {
   // Removing the article page so that it won't be re-picked
   pages.splice(randomPageIndex, 1);
 
+  console.log(`pages in API: ${pages}`)
+  console.log(`randomPage in API: ${randomPage}`)
   return randomPage.replace(/["_"]/g, " ");
 };
 

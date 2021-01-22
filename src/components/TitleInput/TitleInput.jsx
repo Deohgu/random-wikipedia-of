@@ -4,7 +4,7 @@ import styles from "./TitleInput.module.css";
 const TitleInput = ({
   inputData,
   handleInputData,
-  inputDataSubmit,
+  submitData,
   randomPageTitle,
   recommendedArr,
   setInputData,
@@ -20,7 +20,7 @@ const TitleInput = ({
         href={"https://en.wikipedia.org/wiki/" + randomPageTitle}
         className={styles.randomPageTitle}
       >
-        {randomPageTitle}
+        {randomPageTitle + " "}
       </a>
     </>
   );
@@ -34,7 +34,7 @@ const TitleInput = ({
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          inputDataSubmit();
+          submitData(inputData);
           handleFetch();
         }}
       >
@@ -54,7 +54,7 @@ const TitleInput = ({
       <h1 className={styles.title}>
         {randomPageTitle === "Random"
           ? `YOU WILL BE PROVIDED A ${randomPageTitle} `
-          : componentToRenderTwo + " "}
+          : componentToRenderTwo}
         ARTICLE.
       </h1>
 
@@ -70,7 +70,8 @@ const TitleInput = ({
               type="button"
               onClick={async () => {
                 setInputData(curr.title);
-                inputDataSubmit(curr.title);
+                console.log(`curr.title: ${curr.title}`)
+                submitData(curr.title);
                 handleFetch();
                 searchInput.current.focus();
               }}

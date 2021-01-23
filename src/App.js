@@ -5,8 +5,6 @@ import styles from "./App.module.css";
 
 import { newCat, newSubCat, recommendedFunc } from "./api";
 
-// Currently need to clean the mixture of using handleFetch and inputData.
-
 const App = () => {
   const [inputData, setInputData] = useState("");
   const [prevInputData, setPrevInputData] = useState("");
@@ -24,20 +22,23 @@ const App = () => {
     setRandomPage(fetchedData);
   };
 
-  const handleFetch = async (input) => {
-    const dataTransf = await (input && recommendedFunc(input)); // Fetches if input was passed
-    input ? setRecommendedArr(dataTransf) : setRecommendedArr([]); // Resets if no input === user deleted input fully
+  // Would always setInputData, but only setRecommendedArr sometimes right?
+  // Can it handle a submitData as well?
+  const handleFetch = async (input, shouldSubmit) => {
+    console.log(`handleFetch input: ${input}`);
+    input !== inputData && setInputData(input);
+    const dataTransf = await (input && recommendedFunc(input)); // Fetches recommendations if input was passed
+    input ? setRecommendedArr(dataTransf) : setRecommendedArr([]); // Resets if no input === user deleted input text fully
+    shouldSubmit && submitData(input);
   };
 
   return (
     <div className={styles.container}>
       <TitleInput
         inputData={inputData}
-        handleInputData={(input) => setInputData(input)}
-        submitData={(receivedData) => submitData(receivedData)}
+        submitData={() => submitData(inputData)} // Form submits
         randomPageTitle={randomPage}
         recommendedArr={recommendedArr}
-        setInputData={setInputData}
         handleFetch={handleFetch}
       />
     </div>

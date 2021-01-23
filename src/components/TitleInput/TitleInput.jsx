@@ -3,16 +3,15 @@ import styles from "./TitleInput.module.css";
 
 const TitleInput = ({
   inputData,
-  handleInputData,
   submitData,
   randomPageTitle,
   recommendedArr,
-  setInputData,
   handleFetch,
 }) => {
   const searchInput = useRef(null);
 
   // Enables me to use multiple elements in the ternary operator.
+  // To be improved.
   const componentToRenderTwo = (
     <>
       YOU HAVE THE linked{" "}
@@ -31,11 +30,12 @@ const TitleInput = ({
 
       <h1 className={styles.title}>WITHIN THE WIKIPEDIA CATEGORY OF</h1>
 
+      {/* CURRENTLY HERE. Trying to get data from the form to pass to handleFetch */}
       <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          submitData(inputData);
-          handleFetch();
+        onSubmit={(e) => {
+          console.dir(e);
+          e.preventDefault();
+          handleFetch(e.target.value, true);
         }}
       >
         <input
@@ -44,9 +44,9 @@ const TitleInput = ({
           placeholder=""
           value={inputData}
           onChange={(e) => {
-            handleInputData(e.target.value);
-            handleFetch(e.target.value);
-          }} // Fetches the API when a new character is inserted
+            console.log(`e in input onChange: ${e}`);
+            handleFetch(e.target.value, false); // false === does not call submitData func
+          }} // Calls recommendedFunc to fetch recommendations when a new character is inserted
           autoFocus
           ref={searchInput}
         />
@@ -58,9 +58,6 @@ const TitleInput = ({
         ARTICLE.
       </h1>
 
-      {/* https://stackoverflow.com/questions/54069253/usestate-set-method-not-reflecting-change-immediately
-      According to this it means that states are only updated after each render, in this case because the function is within another function meaning a closure the state is still undefined. The fix is to always use useEffect for these fetches, only not when we need to get another random result. But maybe even then it would work with if statments on the useEffect, I just cannot be updating states there for some reason. */}
-
       <div className={styles.recContainer}>
         {recommendedArr.length > 0 &&
           recommendedArr.map((curr, index) => (
@@ -69,10 +66,7 @@ const TitleInput = ({
               className={styles.recommendations}
               type="button"
               onClick={async () => {
-                setInputData(curr.title);
-                console.log(`curr.title: ${curr.title}`)
-                submitData(curr.title);
-                handleFetch();
+                handleFetch(curr.title, true);
                 searchInput.current.focus();
               }}
             >

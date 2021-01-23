@@ -1,10 +1,9 @@
-// If the picked subcat has no pages (probably only subcats) fetch a level deeper?  In total it's first Category Fetch, second SubCat fetch, and third random subCat fetch. For a new random it's simply 2 fetches. So not that many unless you're very unlucky.
-
-// Need to have a way to search the results without a subcategory,maybe for now use a secrect key. that calls a funtion with sub cats just to use on things like COnspiracy Theories.
-
 let url = "";
 let pages = [];
 let subCats = [];
+
+// If an ERROR is received is it likely that it was done through form submit
+// See this issue https://github.com/Deohgu/random-wikipedia-of/issues/13
 
 const fetchPush = async (urlWithCat) => {
   const urlFetch = await fetch(urlWithCat);
@@ -12,7 +11,7 @@ const fetchPush = async (urlWithCat) => {
     query: { categorymembers },
   } = await urlFetch.json();
 
-  for await (const element of categorymembers) {
+  for (const element of categorymembers) {
     if (element.type === "page") {
       pages.push(element.title.replace(/[" "]/g, "_")); // articles/pages to pages array
     } else {
@@ -29,7 +28,7 @@ export const newCat = async (category) => {
   pages = [];
   subCats = [];
 
-  url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${category}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat&origin=*`;
+  url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${category}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat&origin=*`; // cannot lower case URLs, Wikipedia categories are case sensitive
 
   await fetchPush(url);
 
@@ -40,7 +39,6 @@ export const newCat = async (category) => {
 export const newSubCat = async () => {
   const randomSubCatIndex = Math.floor(Math.random() * subCats.length);
   const randomSubCat = subCats[randomSubCatIndex];
-  console.log(`testing subCats[0]: ${subCats[0]}`)
   // Removing the subCat so that it won't be re-picked.
   subCats.splice(randomSubCatIndex, 1);
 
@@ -55,23 +53,18 @@ export const newSubCat = async () => {
   // Removing the article page so that it won't be re-picked
   pages.splice(randomPageIndex, 1);
 
-  console.log(`pages in API: ${pages}`)
-  console.log(`randomPage in API: ${randomPage}`)
   return randomPage.replace(/["_"]/g, " ");
 };
 
-// In the future the app might call another more complex function to clean the results
-// Such as B-Class and Uppercase the word after. Check wikipedia for other variants
+// Fetches existing categories related to the current input to recommend
 export const recommendedFunc = async (data) => {
   const recomendedFetch = await fetch(
     `https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=6&namespace=14&suggest&search=${data}&origin=*`
   );
   const jsonData = await recomendedFetch.json();
-  const parsedData = await jsonData[1].map((curr, index) => {
-    return {
-      title: curr.replace(/Category:/g, ""),
-      url: jsonData[3][index],
-    };
-  });
+  const parsedData = [];
+  await jsonData[1].map((curr) =>
+    parsedData.push(curr.replace(/^Category:/, ""))
+  );
   return parsedData;
 };

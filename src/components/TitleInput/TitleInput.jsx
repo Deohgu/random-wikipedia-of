@@ -3,7 +3,7 @@ import styles from "./TitleInput.module.css";
 
 const TitleInput = ({
   inputData,
-  randomPage,
+  fetchedData,
   recommendedArr,
   fetchHandler,
 }) => {
@@ -15,10 +15,10 @@ const TitleInput = ({
     <>
       YOU HAVE THE linked{" "}
       <a
-        href={"https://en.wikipedia.org/wiki/" + randomPage}
-        className={styles.randomPage}
+        href={"https://en.wikipedia.org/wiki/" + fetchedData.picked}
+        className={styles.randomPageTitle}
       >
-        {randomPage + " "}
+        {fetchedData.picked + " "}
       </a>
     </>
   );
@@ -47,8 +47,8 @@ const TitleInput = ({
         />
       </form>
       <h1 className={styles.title}>
-        {randomPage === "Random"
-          ? `YOU WILL BE PROVIDED A ${randomPage} `
+        {fetchedData === "Random"
+          ? `YOU WILL BE PROVIDED A ${fetchedData} `
           : componentToRenderTwo}
         ARTICLE.
       </h1>

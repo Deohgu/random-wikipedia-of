@@ -1,16 +1,21 @@
 import { fetchPush } from "./fetchPush";
-import { newSubCat } from "./newSubCat";
+import { randomPicker } from "./randomPicker";
 
 // Called when a new category is entered
 export const newCat = async (category) => {
-  // Resetting for the new category.
+  // fetches articles and subCats
+  // articlesSubcats = { articles: [...], subCats: [...] }
+  const articlesSubcats = await fetchPush(category);
 
-  const url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${category.replace(
-    /[" "]/g,
-    "_"
-  )}&cmprop=title|type&format=json&cmlimit=500&cmtype=page|subcat&origin=*`; // cannot lower case URLs, Wikipedia categories are case sensitive
+  // Can be improved by somewhat calling anotherSubCat
+  // If depth of 2 ////////////////////////////
+  const anotherCat = randomPicker(articlesSubcats, "subCats"); // a random category to add more data
 
-  const fetchedData = await fetchPush(url);
+  articlesSubcats.articles = fetchPush(anotherCat).articles; // adds more articles to original
+  articlesSubcats.subCats = fetchPush(anotherCat).subCats; // adds more categories to original
+  ////////////////////////////////////////////
 
-  return newSubCat(fetchedData);
+  articlesSubcats.picked = randomPicker(articlesSubcats, "article"); // picks an article for the user
+
+  return articlesSubcats; // {picked: "", articles: [], subCats: []}
 };

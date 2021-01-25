@@ -1,4 +1,4 @@
-export const fetchPush = async (category) => {
+export const fetchList = async (category) => {
   const url = `https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:${category.replace(
     /[" "]/g,
     '_'
@@ -18,6 +18,5 @@ export const fetchPush = async (category) => {
       )
     }
   }
-  console.log(`fetchedData: ${fetchedData}`)
   return fetchedData
 }

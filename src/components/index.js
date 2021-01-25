@@ -1,1 +1,1 @@
-export {default as TitleInput} from './TitleInput/TitleInput';
+export { default as TitleInput } from './TitleInput/TitleInput'

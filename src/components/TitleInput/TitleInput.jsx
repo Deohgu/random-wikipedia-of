@@ -1,27 +1,27 @@
-import React, { useRef } from "react";
-import styles from "./TitleInput.module.css";
+import React, { useRef } from 'react'
+import styles from './TitleInput.module.css'
 
 const TitleInput = ({
   inputData,
   fetchedData,
   recommendedArr,
-  fetchHandler,
+  fetchHandler
 }) => {
-  const inputFocus = useRef(null);
+  const inputFocus = useRef(null)
 
   // Enables me to use multiple elements in the ternary operator.
   // To be improved.
   const componentToRenderTwo = (
     <>
-      YOU HAVE THE linked{" "}
+      YOU HAVE THE linked{' '}
       <a
-        href={"https://en.wikipedia.org/wiki/" + fetchedData.picked}
+        href={'https://en.wikipedia.org/wiki/' + fetchedData.picked}
         className={styles.randomPageTitle}
       >
-        {fetchedData.picked + " "}
+        {fetchedData.picked + ' '}
       </a>
     </>
-  );
+  )
 
   return (
     <div className={styles.container}>
@@ -30,24 +30,24 @@ const TitleInput = ({
       <h1 className={styles.title}>WITHIN THE WIKIPEDIA CATEGORY OF</h1>
       <form
         onSubmit={(e) => {
-          e.preventDefault();
-          fetchHandler(inputData, true);
+          e.preventDefault()
+          fetchHandler(inputData, true)
         }}
       >
         <input
-          action=""
-          type="text"
-          placeholder=""
+          action=''
+          type='text'
+          placeholder=''
           value={inputData}
           onChange={(e) => {
-            fetchHandler(e.target.value, false); // false === fetchHandler does not call submitData
+            fetchHandler(e.target.value, false) // false === fetchHandler does not call submitData
           }} // Calls recommendedFunc to fetch recommendations when a new character is inserted
           autoFocus
           ref={inputFocus}
         />
       </form>
       <h1 className={styles.title}>
-        {fetchedData === "Random"
+        {fetchedData === 'Random'
           ? `YOU WILL BE PROVIDED A ${fetchedData} `
           : componentToRenderTwo}
         ARTICLE.
@@ -59,10 +59,10 @@ const TitleInput = ({
             <button
               key={`recommended${index}`}
               className={styles.recommendations}
-              type="button"
+              type='button'
               onClick={async () => {
-                fetchHandler(curr, true);
-                inputFocus.current.focus();
+                fetchHandler(curr, true)
+                inputFocus.current.focus()
               }}
             >
               {curr}
@@ -70,7 +70,7 @@ const TitleInput = ({
           ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TitleInput;
+export default TitleInput

@@ -20,10 +20,13 @@ const App = () => {
     subCats: []
   })
 
+  console.count('App')
+  console.log(`fetchedData.picked: ${fetchedData.picked}`)
+
   // Call API fetching funcs and handles the received data
-  // CURRENTLY HERE - anotherSubCat(dataToFetch) needs to receive the array
-  // Line 30. Because it selects a new category from the list, so it needs the list
-  // first if can be a string, but second must receive the initial data
+  // CURRENTLY HERE. App crashes if enter is pressed to quick. something to do with the async?
+
+  // Remember, objects, arrays and parameters are all reference values. As I was copying before I was mutating the state.
   const submitData = async (dataToFetch) => {
     let fetchedDataTemp = ''
     if (dataToFetch !== '' && dataToFetch !== prevInputData) {
@@ -34,16 +37,24 @@ const App = () => {
       // fetchs more articles from a another subcategory
       fetchedDataTemp = await anotherSubCat(fetchedData) // parameter expects old data to add more {picked: "", articles: [], subCats: []}
     }
+    console.log(`fetchedDataTemp.picked in submitData: ${fetchedDataTemp.picked}`)
     setFetchedData(fetchedDataTemp)
+    // setPickedArticle(fetchedDataTemp.picked) // extracts the picked choice
   }
 
   // Data handler for new form inputs, buttons pressed, and form submit
   const fetchHandler = async (input, shouldSubmit) => {
     console.log(`fetchHandler: ${input}`)
     input !== inputData && setInputData(input) // Sets inputData when it receives a *new* input
-    const dataTransf = await (input && recommendedFunc(input)) // Fetches recommendations if input was passed
-    input ? setRecommendedArr(dataTransf) : setRecommendedArr([]) // Resets if no input === user deleted input text fully
-    input && shouldSubmit && submitData(input)
+    if (input) {
+      if (input !== inputData) {
+        const dataTransf = await recommendedFunc(input) // Fetches recommendations if a new input was passed
+        setRecommendedArr(dataTransf) // displays new recommendations
+      }
+      shouldSubmit && submitData(input) // when shouldSubmit true it fetches the data for that input
+    } else {
+      setRecommendedArr([]) // clears recommendations if input does not exist = user deleted
+    }
   }
 
   return (
@@ -51,6 +62,7 @@ const App = () => {
       <TitleInput
         inputData={inputData}
         fetchedData={fetchedData}
+        // pickedArticle={pickedArticle}
         recommendedArr={recommendedArr}
         fetchHandler={fetchHandler}
       />

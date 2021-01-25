@@ -1,15 +1,17 @@
-import { fetchPush } from './fetchPush'
+import { fetchList } from './fetchList'
 import { randomPicker } from './randomPicker'
 
 // Called when a category is already entered but user wants another result
 export const anotherSubCat = async (fetchedData) => {
-  const articlesSubcats = fetchedData
-  const anotherCat = randomPicker(articlesSubcats, 'subCats') // a random category to add more data
+  const fetchedDataCopy = { ...fetchedData }
+  const anotherCat = randomPicker(fetchedDataCopy, 'subCats') // a random category to add more data
 
-  articlesSubcats.articles = fetchPush(anotherCat).articles // adds more articles to original from picked category
-  articlesSubcats.subCats = fetchPush(anotherCat).subCats // adds more categories to original from picked category
+  const newData = fetchList(anotherCat)
+  fetchedDataCopy.articles.push(newData.articles) // adds more articles to original from picked category
+  fetchedDataCopy.subCats.push(newData.subCats) // adds more categories to original from picked category
 
-  articlesSubcats.picked = randomPicker(articlesSubcats, 'article') // picks an article for the user
+  fetchedDataCopy.picked = randomPicker(fetchedDataCopy, 'article') // picks an article for the user
 
-  return articlesSubcats // {picked: "", articles: [], subCats: []}
+  console.log(`anotherSubCat return list picked: ${fetchedDataCopy.picked}`)
+  return fetchedDataCopy // {picked: "", articles: [], subCats: []}
 }

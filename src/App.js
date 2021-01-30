@@ -25,6 +25,7 @@ const App = () => {
 
   // Call API fetching funcs and handles the received data
   // CURRENTLY HERE. App crashes if enter is pressed to quick. something to do with the async?
+  // it has literaly failed at the first pull even after waiting for awhile so its not a matter of async speed.
 
   // Remember, objects, arrays and parameters are all reference values. As I was copying before I was mutating the state.
   const submitData = async (dataToFetch) => {

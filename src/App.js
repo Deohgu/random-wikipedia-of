@@ -20,20 +20,25 @@ const App = () => {
     subCats: []
   })
 
+  // STILL CRASHES AFTER AWHILE
+  // Need to analyse what the output or input is that causes a crash
+  // Check anotherSubCat
+  // Length of articles does not change, so it is not adding new articles to the basket
+
   // Call API fetching funcs and handles the received data
   const submitData = async (dataToFetch) => {
-    let fetchedDataTemp = ''
     if (dataToFetch !== '' && dataToFetch !== prevInputData) {
       // fetches a new category with articles and subcategories
-      fetchedDataTemp = await newCat(dataToFetch)
+      const newData = await newCat(dataToFetch)
       setPrevInputData(dataToFetch)
+      setFetchedData(newData)
     } else if (dataToFetch !== '' && dataToFetch === prevInputData) {
       // fetchs more articles from a another subcategory
-      fetchedDataTemp = await anotherSubCat(fetchedData) // parameter expects old data to add more {picked: "", articles: [], subCats: []}
+      const newData = await anotherSubCat(fetchedData) // parameter expects old data to add more {picked: "", articles: [], subCats: []}
+      setFetchedData(newData)
     }
-    setFetchedData(fetchedDataTemp)
-    // setPickedArticle(fetchedDataTemp.picked) // extracts the picked choice
   }
+
 
   // Data handler for new form inputs, buttons pressed, and form submit
   const fetchHandler = async (input, shouldSubmit) => {

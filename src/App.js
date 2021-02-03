@@ -20,14 +20,7 @@ const App = () => {
     subCats: []
   })
 
-  console.count('App')
-  console.log(`fetchedData.picked: ${fetchedData.picked}`)
-
   // Call API fetching funcs and handles the received data
-  // CURRENTLY HERE. App crashes if enter is pressed to quick. something to do with the async?
-  // it has literaly failed at the first pull even after waiting for awhile so its not a matter of async speed.
-
-  // Remember, objects, arrays and parameters are all reference values. As I was copying before I was mutating the state.
   const submitData = async (dataToFetch) => {
     let fetchedDataTemp = ''
     if (dataToFetch !== '' && dataToFetch !== prevInputData) {
@@ -38,14 +31,12 @@ const App = () => {
       // fetchs more articles from a another subcategory
       fetchedDataTemp = await anotherSubCat(fetchedData) // parameter expects old data to add more {picked: "", articles: [], subCats: []}
     }
-    console.log(`fetchedDataTemp.picked in submitData: ${fetchedDataTemp.picked}`)
     setFetchedData(fetchedDataTemp)
     // setPickedArticle(fetchedDataTemp.picked) // extracts the picked choice
   }
 
   // Data handler for new form inputs, buttons pressed, and form submit
   const fetchHandler = async (input, shouldSubmit) => {
-    console.log(`fetchHandler: ${input}`)
     input !== inputData && setInputData(input) // Sets inputData when it receives a *new* input
     if (input) {
       if (input !== inputData) {

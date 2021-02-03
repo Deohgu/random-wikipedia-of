@@ -1,6 +1,5 @@
 // Random article in pages
 export const randomPicker = (fetchedData, type) => {
-  console.count('randomPicker')
   if (type === 'article') {
     const randomPageIndex = Math.floor(
       Math.random() * { ...fetchedData }.articles.length
@@ -11,7 +10,6 @@ export const randomPicker = (fetchedData, type) => {
     // return fetchedData;
     return randomArticle // Returns article to be used.
   } else if (type === 'subCats') {
-    console.count('else in randomPicker')
     const randomSubCatIndex = Math.floor(
       Math.random() * { ...fetchedData }.subCats.length
     )

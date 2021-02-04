@@ -1,10 +1,3 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v7.0.29,
-* Autoprefixer: v9.7.6
-* Browsers: last 4 version
-*/
-
 .container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -20,8 +13,6 @@
 .title {
   font-family: "Oswald";
   text-transform: uppercase;
-  /* Test with actual font and see how it works, if not good check back on the app container width */
-  /*text-align: justify;*/
   word-spacing: 1px;
 
   letter-spacing: 0.1px;
@@ -31,7 +22,6 @@
 }
 
 .randomPageTitle {
-  /*color: inherit;*/
   font-style: italic;
 }
 
@@ -88,39 +78,4 @@ input {
 
 input:focus {
   outline: none;
-}
-
-.recContainer {
-  /* width to match the general thing and perhaps some padding, see if it's needed at all. Maybe the parent container already does the job. */
-}
-
-.recommendations {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-
-  background-color: rgb(245, 209, 162);
-
-  border: none;
-  padding: 8px 12px;
-  width: 100%;
-
-  font-size: 20px;
-}
-
-/* Check of this looks the same as adding to .recContainer, if so this serves the purpose of not showing any empty space underneath CATEGORY. whilst there is no recommendations */
-
-.recommendations:first-child {
-  margin-top: 20px;
-}
-
-.recommendations:not(:last-child) {
-  border: 8px solid rgb(255, 219, 172);
-  border-left: 0;
-  border-right: 0;
-  border-top: 0;
 }

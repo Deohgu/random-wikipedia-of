@@ -1,72 +1,76 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from 'react'
+import styles from './App.module.css'
 
-import { TitleInput } from "./components";
-import styles from "./App.module.css";
+// components
+import { TitleInput } from './components/TitleInput/TitleInput'
+import { Recommendations } from './components/Recommendations/Recommendations'
 
-import { newCat, newSubCat, recommendedFunc } from "./api";
+// util functions
+import { recommendedFunc } from './utils/recommendedFunc'
+import { newCat } from './utils/newCat'
+import { anotherSubCat } from './utils/anotherSubCat'
 
-const App = () => {
-  const [inputData, setInputData] = useState("");
-  const [prevInputData, setPrevInputData] = useState("");
-  const [recommendedArr, setRecommendedArr] = useState([]);
-  const [recomPressed, setRecomPressed] = useState(false);
-  const [randomPage, setRandomPage] = useState("Random");
+// If an ERROR is received after submiting is it likely that it was done through form submit instead of pressing recommendations
+// See this issue https://github.com/Deohgu/random-wikipedia-of/issues/13
 
-  // useEffect is returning an array of recommended searches based on input and in return we are rendering that array with .map to create several recommendations in the form of buttons.
-  useEffect(() => {
-    const fetchedData = async () => {
-      const dataTransf = await recommendedFunc(inputData);
-      setRecommendedArr(dataTransf);
-    };
-    fetchedData();
-  }, [inputData]);
+export const App = () => {
+  const [inputData, setInputData] = useState('')
+  const [prevInputData, setPrevInputData] = useState('')
+  const [recommendedArr, setRecommendedArr] = useState([])
+  const [fetchedData, setFetchedData] = useState({
+    picked: 'Random',
+    articles: [],
+    subCats: []
+  })
 
-  useEffect(() => {
-    if (recomPressed === true) {
-      submitData(inputData);
-    }
-    setRecomPressed(false);
-  }, [recomPressed === true]);
-
+  // Call API fetching funcs and handles the received data
   const submitData = async (dataToFetch) => {
-    let fetchedData = "";
-    if (dataToFetch !== "" && dataToFetch !== prevInputData) {
-      fetchedData = await newCat(dataToFetch.replace(/[" "]/g, "_"));
-      setPrevInputData(dataToFetch);
-    } else if (dataToFetch !== "" && dataToFetch === prevInputData) {
-      fetchedData = await newSubCat(dataToFetch.replace(/[" "]/g, "_"));
+    if (dataToFetch !== '' && dataToFetch !== prevInputData) {
+      // fetches a new category with articles and subcategories
+      const newData = await newCat(dataToFetch)
+      setPrevInputData(dataToFetch)
+      setFetchedData(newData)
+    } else if (dataToFetch !== '' && dataToFetch === prevInputData) {
+      // fetchs more articles from a another subcategory
+      const newData = await anotherSubCat(fetchedData) // parameter expects old data to add more {picked: "", articles: [], subCats: []}
+      setFetchedData(newData)
     }
-    setRandomPage(fetchedData);
-  };
+  }
 
-  const searchInput = useRef(null);
+  // Data handler for new form inputs, buttons pressed, and form submit
+  const fetchHandler = async (input, shouldSubmit) => {
+    input !== inputData && setInputData(input) // Sets inputData when it receives a *new* input
+    if (input) {
+      if (input !== inputData) {
+        const dataTransf = await recommendedFunc(input) // Fetches recommendations if a new input was passed
+        setRecommendedArr(dataTransf) // displays new recommendations
+      }
+      shouldSubmit && submitData(input) // when shouldSubmit true it fetches the data for that input
+    } else {
+      setRecommendedArr([]) // clears recommendations if input does not exist = user deleted
+    }
+  }
 
-  const handleFocus = () => {
-    searchInput.current.focus();
-  };
+  // onClick in recommendations will focus on input
+  const inputFocus = useRef(null)
+  const focusHandler = () => {
+    inputFocus.current.focus()
+  }
 
   return (
     <div className={styles.container}>
       <TitleInput
         inputData={inputData}
-        handleChange={(e) => setInputData(e.target.value)}
-        inputDataSubmit={() => submitData(inputData)}
-        randomPageTitle={randomPage}
+        fetchedData={fetchedData}
         recommendedArr={recommendedArr}
-        setInputData={setInputData}
-        setRecomPressed={setRecomPressed}
-        handleFocus={handleFocus}
-        searchInput={searchInput}
+        fetchHandler={fetchHandler}
+        inputFocus={inputFocus}
+      />
+      <Recommendations
+        recommendedArr={recommendedArr}
+        fetchHandler={fetchHandler}
+        focusHandler={focusHandler}
       />
     </div>
-  );
-};
-
-export default App;
-
-
-// Delete after
-// Done - Need to change the text to the planned one on evernote.
-// Done - Need to change the top margin when on the phone
-// Done - Need to change the bottom margin of the container where CATEGORY is, remove there and add to the recommendations container instead (mostly for the black bar at the moment)
-// Need to have a way to search the results without a subcategory,maybe for now use a secrect key. that calls a funtion with sub cats just to use on things like COnspiracy Theories.
+  )
+}

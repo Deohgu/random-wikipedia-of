@@ -10,7 +10,7 @@ export const newCat = async (category) => {
     .catch((error) => console.log(error))
 
   // Can be improved by somewhat calling anotherSubCat
-  // If depth of 2 ////////////////////////////
+  // If depth of 2 - https://github.com/Deohgu/random-wikipedia-of/issues/14 /////////
   const anotherCat = randomPicker(articlesSubcats, 'subCats') // a random category to add more data
 
   // Removing the category so that it won't be re-picked
@@ -23,7 +23,7 @@ export const newCat = async (category) => {
 
   articlesSubcats.articles = articlesSubcats.articles.concat(newData.articles) // adds more articles to original from picked category
   articlesSubcats.subCats = articlesSubcats.subCats.concat(newData.subCats) // adds more categories to original from picked category
-  /// //////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////
 
   articlesSubcats.picked = randomPicker(articlesSubcats, 'article') // picks an article for the user
 

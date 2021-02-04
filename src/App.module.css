@@ -133,7 +133,7 @@ table {
 }
 
 body {
-  background-color: rgb(255, 219, 172);
+  background-color: rgb(255, 216, 165);
 }
 
 .container {
@@ -142,10 +142,8 @@ body {
   font-weight: 700;
 
   margin: 30px auto 0 auto;
-  /* visual guide */
   border-left: 10px solid black;
   padding-left: 20px;
-  /* Back to 250px if not going to use justigy */
   width: 265px;
 }
 

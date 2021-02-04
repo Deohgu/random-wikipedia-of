@@ -39,7 +39,6 @@ const App = () => {
     }
   }
 
-
   // Data handler for new form inputs, buttons pressed, and form submit
   const fetchHandler = async (input, shouldSubmit) => {
     input !== inputData && setInputData(input) // Sets inputData when it receives a *new* input

@@ -4,7 +4,7 @@ export const randomPicker = (fetchedData, type) => {
     const randomPageIndex = Math.floor(
       Math.random() * { ...fetchedData }.articles.length
     )
-    const randomArticle = { ...fetchedData }.articles[randomPageIndex]
+    const randomArticle = { ...fetchedData }.articles[randomPageIndex].replace(/["_"]/g, ' ')
 
     return randomArticle // Returns article to be used.
   } else if (type === 'subCats') {

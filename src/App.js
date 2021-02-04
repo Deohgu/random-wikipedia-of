@@ -1,16 +1,19 @@
-import React, { useState } from 'react'
-
-import { TitleInput } from './components'
+import React, { useState, useRef } from 'react'
 import styles from './App.module.css'
 
+// components
+import { TitleInput } from './components/TitleInput/TitleInput'
+import { Recommendations } from './components/Recommendations/Recommendations'
+
+// util functions
 import { recommendedFunc } from './utils/recommendedFunc'
 import { newCat } from './utils/newCat'
 import { anotherSubCat } from './utils/anotherSubCat'
 
-// If an ERROR is received is it likely that it was done through form submit
+// If an ERROR is received after submiting is it likely that it was done through form submit instead of pressing recommendations
 // See this issue https://github.com/Deohgu/random-wikipedia-of/issues/13
 
-const App = () => {
+export const App = () => {
   const [inputData, setInputData] = useState('')
   const [prevInputData, setPrevInputData] = useState('')
   const [recommendedArr, setRecommendedArr] = useState([])
@@ -19,11 +22,6 @@ const App = () => {
     articles: [],
     subCats: []
   })
-
-  // STILL CRASHES AFTER AWHILE
-  // Need to analyse what the output or input is that causes a crash
-  // Check anotherSubCat
-  // Length of articles does not change, so it is not adding new articles to the basket
 
   // Call API fetching funcs and handles the received data
   const submitData = async (dataToFetch) => {
@@ -53,17 +51,26 @@ const App = () => {
     }
   }
 
+  // onClick in recommendations will focus on input
+  const inputFocus = useRef(null)
+  const focusHandler = () => {
+    inputFocus.current.focus()
+  }
+
   return (
     <div className={styles.container}>
       <TitleInput
         inputData={inputData}
         fetchedData={fetchedData}
-        // pickedArticle={pickedArticle}
         recommendedArr={recommendedArr}
         fetchHandler={fetchHandler}
+        inputFocus={inputFocus}
+      />
+      <Recommendations
+        recommendedArr={recommendedArr}
+        fetchHandler={fetchHandler}
+        focusHandler={focusHandler}
       />
     </div>
   )
 }
-
-export default App

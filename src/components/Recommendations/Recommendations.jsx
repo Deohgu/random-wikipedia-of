@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Recommendations.module.css'
+import { RecommContainer } from './Recommendations.styled'
 
 export const Recommendations = ({
   recommendedArr,
@@ -10,16 +10,15 @@ export const Recommendations = ({
     <div>
       {recommendedArr.length > 0 &&
           recommendedArr.map((curr, index) => (
-            <button
-              key={`recommended${index}`}
-              className={styles.recommendations}
+            <RecommContainer
               onClick={async () => {
                 fetchHandler(curr, true)
                 focusHandler()
               }}
+              key={`recommended${index}`}
             >
               {curr}
-            </button>
+            </RecommContainer>
           ))}
     </div>
   )

@@ -1,12 +1,8 @@
-.recommendations {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+import styled from 'styled-components'
 
+export const RecommContainer = styled.button`
+  display: flex;
+  flex-direction: column;
   background-color: rgb(245, 209, 162);
 
   border: none;
@@ -14,15 +10,16 @@
   width: 100%;
 
   font-size: 20px;
-}
 
-.recommendations:first-child {
+  &:first-child {
   margin-top: 20px;
 }
 
-.recommendations:not(:last-child) {
+  &:not(:last-child) {
   border: 8px solid rgb(255, 219, 172);
   border-left: 0;
   border-right: 0;
   border-top: 0;
 }
+
+`

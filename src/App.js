@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import styles from './App.module.css'
+import { AppContainer, GlobalStyle } from './App.styled'
 
 // components
 import { TitleInput } from './components/TitleInput/TitleInput'
@@ -58,7 +58,8 @@ export const App = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <AppContainer>
+      <GlobalStyle />
       <TitleInput
         inputData={inputData}
         fetchedData={fetchedData}
@@ -71,6 +72,6 @@ export const App = () => {
         fetchHandler={fetchHandler}
         focusHandler={focusHandler}
       />
-    </div>
+    </AppContainer>
   )
 }

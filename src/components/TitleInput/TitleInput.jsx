@@ -1,5 +1,6 @@
 import React from 'react'
-import styles from './TitleInput.module.css'
+
+import { TitleContainer, Title, RandomPage, TitleForm, TitleInputField } from './TitleInput.styled'
 
 export const TitleInput = ({
   inputData,
@@ -11,36 +12,35 @@ export const TitleInput = ({
   const toDisplayConditionally = () => {
     if (fetchedData.picked === 'Random') {
       return (
-        <h1 className={styles.title}>
+        <Title>
           YOU WILL BE PROVIDED A RANDOM ARTICLE.
-        </h1>
+        </Title>
       )
     } else {
       return (
-        <h1 className={styles.title}>
+        <Title>
           YOU HAVE THE linked{' '}
-          <a
+          <RandomPage
             href={'https://en.wikipedia.org/wiki/' + fetchedData.picked.replace(/[" "]/g, '_')}
-            className={styles.randomPageTitle}
           >
             {fetchedData.picked}
-          </a>
+          </RandomPage>
           {' '}ARTICLE.
-        </h1>
+        </Title>
       )
     }
   }
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>WITHIN THE WIKIPEDIA CATEGORY OF</h1>
-      <form
+    <TitleContainer>
+      <Title>WITHIN THE WIKIPEDIA CATEGORY OF</Title>
+      <TitleForm
         onSubmit={(e) => {
           e.preventDefault()
           fetchHandler(inputData, true)
         }}
       >
-        <input
+        <TitleInputField
           action=''
           type='text'
           placeholder=''
@@ -51,8 +51,8 @@ export const TitleInput = ({
           autoFocus
           ref={inputFocus}
         />
-      </form>
+      </TitleForm>
       {toDisplayConditionally()}
-    </div>
+    </TitleContainer>
   )
 }

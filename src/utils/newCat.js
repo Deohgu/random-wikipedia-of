@@ -23,7 +23,7 @@ export const newCat = async (category) => {
 
   articlesSubcats.articles = articlesSubcats.articles.concat(newData.articles) // adds more articles to original from picked category
   articlesSubcats.subCats = articlesSubcats.subCats.concat(newData.subCats) // adds more categories to original from picked category
-  ////////////////////////////////////////////////////////////////////////////////////
+  /// /////////////////////////////////////////////////////////////////////////////////
 
   articlesSubcats.picked = randomPicker(articlesSubcats, 'article') // picks an article for the user
 

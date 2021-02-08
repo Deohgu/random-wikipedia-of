@@ -33,25 +33,29 @@ export const TitleInput = ({
 
   return (
     <TitleContainer>
-      <Title>WITHIN THE WIKIPEDIA CATEGORY OF</Title>
-      <TitleForm
-        onSubmit={(e) => {
-          e.preventDefault()
-          fetchHandler(inputData, true)
-        }}
-      >
-        <TitleInputField
-          action=''
-          type='text'
-          placeholder=''
-          value={inputData}
-          onChange={(e) => {
-            fetchHandler(e.target.value, false) // fetchHandler(..., false) runs but does not call submitData
-          }} // fetches recommendations when a new character is inserted
-          autoFocus
-          ref={inputFocus}
-        />
-      </TitleForm>
+      <Title>FROM THE CATEGORY</Title>
+      <div style={{ display: 'Flex', flexDirection: 'row' }}>
+        <Title>OF</Title>
+        <Title>&nbsp;</Title> {/* Adds a space in the same line */}
+        <TitleForm
+          onSubmit={(e) => {
+            e.preventDefault()
+            fetchHandler(inputData, true)
+          }}
+        >
+          <TitleInputField
+            action=''
+            type='text'
+            placeholder=''
+            value={inputData}
+            onChange={(e) => {
+              fetchHandler(e.target.value, false) // fetchHandler(..., false) runs but does not call submitData
+            }} // fetches recommendations when a new character is inserted
+            autoFocus
+            ref={inputFocus}
+          />
+        </TitleForm>
+      </div>
       {toDisplayConditionally()}
     </TitleContainer>
   )

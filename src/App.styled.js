@@ -8,7 +8,7 @@ export const AppContainer = styled.div`
   margin: 30px auto 0 auto;
   border-left: 10px solid black;
   padding-left: 20px;
-  width: 265px;
+  width: 433px;
 
   @media (min-width: 700px) {
     margin-top: 100px;

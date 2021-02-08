@@ -25,10 +25,6 @@ export const RandomPage = styled.a`
 export const TitleForm = styled.form`
   display: flex;
   align-content: center;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  width: 100%;
 `
 
 export const TitleInputField = styled.input`
@@ -41,6 +37,7 @@ export const TitleInputField = styled.input`
   border: none;
   border-bottom: 1px solid black;
 
+  flex: 1;
   width: 100%;
   height: 40px;
   padding: 0;
